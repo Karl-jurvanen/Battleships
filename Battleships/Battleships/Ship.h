@@ -19,7 +19,7 @@ public:
 
 private:
 
-	int size;
-	int hits;
+	int size_;
+	int hits_;
 };
 
