@@ -10,4 +10,9 @@ using std::endl;
 
 int main()
 {
+
+	Gameboard peli1;
+	peli1.printShots();
+
+	system("pause");
 }

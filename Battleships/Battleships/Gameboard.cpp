@@ -6,8 +6,19 @@ using std::cin;
 using std::endl;
 
 
-Gameboard::Gameboard()
+Gameboard::Gameboard():elems(BOARD_SIZE)
 {
+	//Initialize both gameboards to empty
+	for (size_t i = 0; i < BOARD_SIZE; i++)
+	{
+		for (size_t j = 0; j < BOARD_SIZE; j++)
+		{
+			shots_[i][j] = 0;
+			ships_[i][j] = 0;
+		}
+	}
+
+	shots_[2][3] = '#';
 
 }
 
@@ -16,15 +27,16 @@ Gameboard::~Gameboard()
 {
 }
 
-void Gameboard::addShip()
+void Gameboard::addShip(int shipSize, int shipIndex)
 {
+
 }
 
-void Gameboard::printShots(char taulukko[BOARD_SIZE][BOARD_SIZE], size_t elems)
+void Gameboard::printShots()
 {
 	char column = 'A';
 
-
+	
 	//Print header for table
 	cout << "    ";
 	for (size_t i = 1; i <= elems; i++)
@@ -48,7 +60,7 @@ void Gameboard::printShots(char taulukko[BOARD_SIZE][BOARD_SIZE], size_t elems)
 		for (size_t j = 0; j < elems; j++)
 		{
 
-			cout << taulukko[i][j] << " ";
+			cout << shots_[i][j] << " ";
 		}
 
 		cout << " | " << column << endl;
