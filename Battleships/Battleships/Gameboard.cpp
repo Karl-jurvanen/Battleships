@@ -31,9 +31,9 @@ Gameboard::Gameboard(int boardSize):boardSize_(boardSize)
 
 
 	shots_[2][3] = '#';
-	ships_[4][1] = 3;
-	ships_[4][2] = 3;
-	ships_[4][3] = 3;
+	ships_[4][0] = 3;
+//	ships_[4][2] = 3;
+//	ships_[4][3] = 3;
 }
 
 
@@ -59,23 +59,27 @@ bool Gameboard::addShip(size_t shipSize, int shipsAdded, string coord, string di
 	{
 		if (dir == "p")
 		{
-			for (size_t i = 0; i < shipSize; i++)
+			for (int i = 0; i < shipSize; i++)
 			{
-				if (checkCoordinate(x, (y-i)))
+				if (! checkCoordinate(x, (y-i)))
 				{
-					if (ships_[x][y - i] != -1)
-					{
-						cout << "Ship already there." << endl;
-						return false;
-					}
+					cout << "Bad coordinate." << endl;
+					return false;
+				}
+				if (ships_[y - i][x] != -1)
+				{
+					cout << "Ship already there." << endl;
+					return false;
 				}
 				
 			}
 			shiplist[shipsAdded].setSize(shipSize);
-			for (size_t i = 0; i < shipSize; i++)
+			for (int i = 0; i < shipSize; i++)
 			{
-				ships_[x][y-i] = shipsAdded;
+				ships_[y-i][x] = shipsAdded;
 			}
+			return true;
+			
 		}
 		else if (dir == "i")
 		{
@@ -130,18 +134,18 @@ void Gameboard::printShips()
 	char column = 'A';
 
 	// Print the game board with row letters on both sides
-	for (size_t i = 0; i < boardSize_; i++)
+	for (size_t y = 0; y < boardSize_; y++)
 	{
 		cout << column << " | ";
-		for (size_t j = 0; j < boardSize_; j++)
+		for (size_t x = 0; x < boardSize_; x++)
 		{
-			if (ships_[i][j] == -1)
+			if (ships_[y][x] == -1)
 			{
 				cout << "  ";
 			}
 			else
 			{
-				cout << ships_[i][j] << " ";
+				cout << ships_[y][x] << " ";
 			}
 		}
 
@@ -196,10 +200,10 @@ bool Gameboard::parseCoordinates(int& x, int& y, string input)
 	{
 		return false;
 	}
-		x = toupper(input[0]) - 'A';
+		y = toupper(input[0]) - 'A';
 		try
 		{
-		y = stoi(input.substr(1)) - 1;
+		x = stoi(input.substr(1)) - 1;
 
 		}
 		catch (const std::invalid_argument&)
@@ -208,7 +212,7 @@ bool Gameboard::parseCoordinates(int& x, int& y, string input)
 			return false;
 		}
 		
-		if ( checkCoordinate(x,y) )
+		if (! checkCoordinate(x,y) )
 		{
 			//one of the coordinates is outside of the game board
 			cout << "Virheellinen koordinaatti." << endl;
@@ -222,6 +226,6 @@ bool Gameboard::parseCoordinates(int& x, int& y, string input)
 bool Gameboard::checkCoordinate(int x, int y)
 {
 
-	return (x < 0 || y < 0) || (x >= boardSize_ || y >= boardSize_);
+	return  ((x >= 0 && y >= 0) && (x < boardSize_ && y < boardSize_));
 }
 
