@@ -1,6 +1,5 @@
 #pragma once
 #include "Ship.h"
-static const int BOARD_SIZE = 10;
 static const int SHIP_COUNT = 4;
 static const int SHIPS_IN_GAME[] = { 1,1,1,1 };  // number of ships of each size 5, 4, 3, 2
 
@@ -14,6 +13,7 @@ public:
 
 	void addShip(int shipSize, int shipIndex);
 	void printShots();
+	void printShips();
 
 private:
 
@@ -23,6 +23,11 @@ private:
 	int boardSize_;
 	char **shots_;
 	int ** ships_;
+
+
+	//helper functions for printing game boards
+	void printHeader();
+	void printFooter();
 
 };
 

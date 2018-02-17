@@ -31,6 +31,9 @@ Gameboard::Gameboard(int boardSize):boardSize_(boardSize)
 
 
 	shots_[2][3] = '#';
+	ships_[4][1] = 3;
+	ships_[4][2] = 3;
+	ships_[4][3] = 3;
 }
 
 
@@ -55,10 +58,62 @@ void Gameboard::addShip(int shipSize, int shipIndex)
 
 void Gameboard::printShots()
 {
+
+	printHeader();
+
 	char column = 'A';
 
-	
-	//Print header for table
+	// Print the game board with row letters on both sides
+	for (size_t i = 0; i < boardSize_; i++)
+	{
+		cout << column << " | ";
+		for (size_t j = 0; j < boardSize_; j++)
+		{
+
+			cout << shots_[i][j] << " ";
+		}
+
+		cout << " | " << column << endl;
+		column++;	//incrementing a char type moves the character to next in the alphabet
+	}
+
+	printFooter();
+
+
+}
+
+void Gameboard::printShips()
+{
+	printHeader();
+
+	char column = 'A';
+
+	// Print the game board with row letters on both sides
+	for (size_t i = 0; i < boardSize_; i++)
+	{
+		cout << column << " | ";
+		for (size_t j = 0; j < boardSize_; j++)
+		{
+			if (ships_[i][j] == 0)
+			{
+				cout << "  ";
+			}
+			else
+			{
+				cout << ships_[i][j] << " ";
+			}
+		}
+
+		cout << " | " << column << endl;
+		column++;	
+	}
+
+	printFooter();
+}
+
+//Function that prints the top rows of gameboard
+void Gameboard::printHeader()
+{
 	cout << "    ";
 	for (size_t i = 1; i <= boardSize_; i++)
 	{
@@ -72,23 +127,11 @@ void Gameboard::printShots()
 		cout << "-";
 	}
 	cout << endl;
+}
 
-	// Print the table with row letters
-	for (size_t i = 0; i < boardSize_; i++)
-	{
-
-		cout << column << " | ";
-		for (size_t j = 0; j < boardSize_; j++)
-		{
-
-			cout << shots_[i][j] << " ";
-		}
-
-		cout << " | " << column << endl;
-		column++;	//incrementing a char type moves the character to next in the alphabet
-	}
-	//Print footer for the table 
-
+//Function that prints the bottom rows of gameboard
+void Gameboard::printFooter()
+{
 	cout << "  ";
 	for (size_t i = 0; i < boardSize_ * 2 + 4; i++)
 	{
