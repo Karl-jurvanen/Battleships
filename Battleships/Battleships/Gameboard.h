@@ -19,8 +19,6 @@ public:
 	void printShips();
 	
 	
-	bool parseCoordinates(int& x, int& y, string input);
-
 private:
 
 	//list of all ships that have been added to the gameboard
@@ -36,6 +34,7 @@ private:
 	void printFooter();
 
 	//Function that parses user input into coordinates on the game board
+	bool parseCoordinates(int& x, int& y, string input);
 
 };
 
