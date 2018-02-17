@@ -11,7 +11,8 @@ public:
 	Ship();
 	Ship(int size);
 
-
+	void setSize(int size);
+	int getSize() const;
 
 	~Ship();
 
