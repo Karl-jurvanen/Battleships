@@ -8,11 +8,21 @@ using std::endl;
 
 
 
+void test(int board)
+{
+	Gameboard game1(board);
+	game1.printShots();
+}
+
 int main()
 {
+	int game = 20;
 
-	Gameboard peli1;
-	peli1.printShots();
+	for (int i = 10; i < game; i++)
+	{
+		test(game);
+	}
+	
 
 	system("pause");
 }

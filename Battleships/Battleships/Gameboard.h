@@ -9,7 +9,7 @@ enum Direction { North, East, South, West };
 class Gameboard
 {
 public:
-	Gameboard();
+	Gameboard(int boardSize);
 	~Gameboard();
 
 	void addShip(int shipSize, int shipIndex);
@@ -20,7 +20,8 @@ private:
 	//list of all ships that have been added to the gameboard
 	Ship shiplist[SHIP_COUNT];
 
-	int elems;
+	int boardSize_;
+	char **ary;
 	char shots_[BOARD_SIZE][BOARD_SIZE];
 	int ships_[BOARD_SIZE][BOARD_SIZE];
 
