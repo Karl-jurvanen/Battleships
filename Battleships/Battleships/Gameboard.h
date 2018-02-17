@@ -21,9 +21,8 @@ private:
 	Ship shiplist[SHIP_COUNT];
 
 	int boardSize_;
-	char **ary;
-	char shots_[BOARD_SIZE][BOARD_SIZE];
-	int ships_[BOARD_SIZE][BOARD_SIZE];
+	char **shots_;
+	int ** ships_;
 
 };
 

@@ -6,38 +6,31 @@ using std::cin;
 using std::endl;
 
 
-Gameboard::Gameboard(int boarSize):boardSize_(boarSize)
+Gameboard::Gameboard(int boardSize):boardSize_(boardSize)
 {
-	//Initialize both gameboards to empty
 
-	ary = new char*[boardSize_];
+	shots_ = new char*[boardSize_];
+	ships_ = new int*[boardSize_];
+
 	for (size_t i = 0; i < boardSize_; i++)
 	{
-		ary[i] = new char[boardSize_];
+		shots_[i] = new char[boardSize_];
+		ships_[i] = new int[boardSize_];
 	}
 
 
+	//Initialize both gameboards to empty
 	for (size_t i = 0; i < boardSize_; i++)
 	{
 		for (size_t j = 0; j < boardSize_; j++)
-		{
-			ary[i][j] = 0;
-			
-		}
-	}
-
-
-	for (size_t i = 0; i < BOARD_SIZE; i++)
-	{
-		for (size_t j = 0; j < BOARD_SIZE; j++)
 		{
 			shots_[i][j] = 0;
 			ships_[i][j] = 0;
 		}
 	}
 
+
 	shots_[2][3] = '#';
-	ary[2][3] = '#';
 }
 
 
@@ -45,9 +38,12 @@ Gameboard::~Gameboard()
 {
 	for (size_t i = 0; i < boardSize_; i++)
 	{
-		delete[] ary[i];
+		delete[] shots_[i];
+		delete[] ships_[i];
 	}
-	delete[] ary;
+	delete[] shots_;
+	delete[] ships_;
+
 
 	cout << "Gameboard destructor." << endl;
 }
@@ -71,7 +67,7 @@ void Gameboard::printShots()
 
 	cout << endl << "  ";
 
-	for (size_t i = 0; i < BOARD_SIZE * 2 + 4; i++)
+	for (size_t i = 0; i < boardSize_ * 2 + 4; i++)
 	{
 		cout << "-";
 	}
@@ -85,7 +81,7 @@ void Gameboard::printShots()
 		for (size_t j = 0; j < boardSize_; j++)
 		{
 
-			cout << ary[i][j] << " ";
+			cout << shots_[i][j] << " ";
 		}
 
 		cout << " | " << column << endl;
@@ -94,7 +90,7 @@ void Gameboard::printShots()
 	//Print footer for the table 
 
 	cout << "  ";
-	for (size_t i = 0; i < BOARD_SIZE * 2 + 4; i++)
+	for (size_t i = 0; i < boardSize_ * 2 + 4; i++)
 	{
 		cout << "-";
 	}

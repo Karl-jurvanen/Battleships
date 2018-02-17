@@ -16,13 +16,13 @@ void test(int board)
 
 int main()
 {
-	int game = 20;
+	int game = 13;
 
-	for (int i = 10; i < game; i++)
+	for (int i = 7; i < game; i++)
 	{
-		test(game);
 	}
 	
+		test(7);
 
 	system("pause");
 }
