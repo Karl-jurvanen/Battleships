@@ -29,11 +29,6 @@ Gameboard::Gameboard(int boardSize):boardSize_(boardSize)
 		}
 	}
 
-
-	shots_[2][3] = '#';
-	ships_[4][0] = 3;
-//	ships_[4][2] = 3;
-//	ships_[4][3] = 3;
 }
 
 
@@ -57,13 +52,14 @@ bool Gameboard::addShip(size_t shipSize, int shipsAdded, string coord, string di
 	int y;
 	if (parseCoordinates(x,y,coord))
 	{
+
 		if (dir == "p")
 		{
-			for (int i = 0; i < shipSize; i++)
+			for (size_t i = 0; i < shipSize; i++)
 			{
 				if (! checkCoordinate(x, (y-i)))
 				{
-					cout << "Bad coordinate." << endl;
+					cout << "Ship goes off game board." << endl;
 					return false;
 				}
 				if (ships_[y - i][x] != -1)
@@ -74,31 +70,92 @@ bool Gameboard::addShip(size_t shipSize, int shipsAdded, string coord, string di
 				
 			}
 			shiplist[shipsAdded].setSize(shipSize);
-			for (int i = 0; i < shipSize; i++)
+			for (size_t i = 0; i < shipSize; i++)
 			{
 				ships_[y-i][x] = shipsAdded;
 			}
 			return true;
 			
 		}
+
 		else if (dir == "i")
 		{
+			for (size_t i = 0; i < shipSize; i++)
+			{
+				if (!checkCoordinate( (x +i), y))
+				{
+					cout << "Ship goes off game board." << endl;
+					return false;
+				}
+				if (ships_[y][x+i] != -1)
+				{
+					cout << "Ship already there." << endl;
+					return false;
+				}
 
+			}
+			shiplist[shipsAdded].setSize(shipSize);
+			for (size_t i = 0; i < shipSize; i++)
+			{
+				ships_[y][x +i] = shipsAdded;
+			}
+			return true;
 		}
+
 		else if (dir == "e")
 		{
+			for (size_t i = 0; i < shipSize; i++)
+			{
+				if (!checkCoordinate(x, (y + i)))
+				{
+					cout << "Ship goes off game board." << endl;
+					return false;
+				}
+				if (ships_[y + i][x] != -1)
+				{
+					cout << "Ship already there." << endl;
+					return false;
+				}
 
+			}
+			shiplist[shipsAdded].setSize(shipSize);
+			for (size_t i = 0; i < shipSize; i++)
+			{
+				ships_[y + i][x] = shipsAdded;
+			}
+			return true;
 		}
+
 		else if (dir == "l")
 		{
+			for (size_t i = 0; i < shipSize; i++)
+			{
+				if (!checkCoordinate( (x-i), y))
+				{
+					cout << "Ship goes off game board." << endl;
+					return false;
+				}
+				if (ships_[y][x-i] != -1)
+				{
+					cout << "Ship already there." << endl;
+					return false;
+				}
 
+			}
+			shiplist[shipsAdded].setSize(shipSize);
+			for (size_t i = 0; i < shipSize; i++)
+			{
+				ships_[y][x-i] = shipsAdded;
+			}
+			return true;
 		}
 		else
 		{
 			cout << "Virheellinen suunta." << endl;
+			return false;
 		}
 	}
-
+	return false;
 }
 
 void Gameboard::printShots()
@@ -145,7 +202,8 @@ void Gameboard::printShips()
 			}
 			else
 			{
-				cout << ships_[y][x] << " ";
+				
+				cout << shiplist[ships_[y][x]].getSize() << " ";
 			}
 		}
 

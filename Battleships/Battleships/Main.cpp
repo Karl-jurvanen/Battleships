@@ -17,10 +17,13 @@ void test(int board)
 
 int main()
 {
-	Gameboard game2(10);
+	Gameboard game2(7);
 
 	game2.printShips();
-	game2.addShip(5, 2, "A6", "p");
+	game2.addShip(5, 1, "G6", "p");
+	game2.addShip(4, 2, "G5", "l");
+	game2.addShip(4, 2, "A1", "e");
+	game2.addShip(3, 3, "A4", "e");
 	game2.printShips();
 	system("pause");
 }
