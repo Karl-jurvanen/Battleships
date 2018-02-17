@@ -51,9 +51,50 @@ Gameboard::~Gameboard()
 	cout << "Gameboard destructor." << endl;
 }
 
-void Gameboard::addShip(int shipSize, int shipIndex, string coord, string dir)
+bool Gameboard::addShip(size_t shipSize, int shipsAdded, string coord, string dir)
 {
-	
+	int x;
+	int y;
+	if (parseCoordinates(x,y,coord))
+	{
+		if (dir == "p")
+		{
+			for (size_t i = 0; i < shipSize; i++)
+			{
+				if (checkCoordinate(x, (y-i)))
+				{
+					if (ships_[x][y - i] != -1)
+					{
+						cout << "Ship already there." << endl;
+						return false;
+					}
+				}
+				
+			}
+			shiplist[shipsAdded].setSize(shipSize);
+			for (size_t i = 0; i < shipSize; i++)
+			{
+				ships_[x][y-i] = shipsAdded;
+			}
+		}
+		else if (dir == "i")
+		{
+
+		}
+		else if (dir == "e")
+		{
+
+		}
+		else if (dir == "l")
+		{
+
+		}
+		else
+		{
+			cout << "Virheellinen suunta." << endl;
+		}
+	}
+
 }
 
 void Gameboard::printShots()
@@ -167,7 +208,7 @@ bool Gameboard::parseCoordinates(int& x, int& y, string input)
 			return false;
 		}
 		
-		if ( (x < 0 || y < 0) || (x >= boardSize_ || y >= boardSize_) )
+		if ( checkCoordinate(x,y) )
 		{
 			//one of the coordinates is outside of the game board
 			cout << "Virheellinen koordinaatti." << endl;
@@ -175,5 +216,12 @@ bool Gameboard::parseCoordinates(int& x, int& y, string input)
 		}
 	
 		return true;
+}
+
+//Function returns true if coordinate is within the gameboard
+bool Gameboard::checkCoordinate(int x, int y)
+{
+
+	return (x < 0 || y < 0) || (x >= boardSize_ || y >= boardSize_);
 }
 

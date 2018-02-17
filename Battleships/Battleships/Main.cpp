@@ -17,20 +17,10 @@ void test(int board)
 
 int main()
 {
-	int game = 13;
-
 	Gameboard game2(10);
 
-
-	int x;
-	int y;
-	
-	if (game2.parseCoordinates(x, y, "A10"))
-	{
-	cout << x << " " << y << endl;
-
-	}
-
-
+	game2.printShips();
+	game2.addShip(5, 2, "A6", "p");
+	game2.printShips();
 	system("pause");
 }
