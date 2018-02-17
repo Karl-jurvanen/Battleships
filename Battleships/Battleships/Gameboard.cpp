@@ -25,7 +25,7 @@ Gameboard::Gameboard(int boardSize):boardSize_(boardSize)
 		for (size_t j = 0; j < boardSize_; j++)
 		{
 			shots_[i][j] = 0;
-			ships_[i][j] = 0;
+			ships_[i][j] = -1;
 		}
 	}
 
@@ -94,7 +94,7 @@ void Gameboard::printShips()
 		cout << column << " | ";
 		for (size_t j = 0; j < boardSize_; j++)
 		{
-			if (ships_[i][j] == 0)
+			if (ships_[i][j] == -1)
 			{
 				cout << "  ";
 			}
