@@ -24,7 +24,7 @@ private:
 	//list of all ships that have been added to the gameboard
 	Ship shiplist[SHIP_COUNT];
 
-	int boardSize_;
+	size_t boardSize_;
 	char **shots_;
 	int ** ships_;
 
