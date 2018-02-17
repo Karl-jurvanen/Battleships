@@ -12,17 +12,25 @@ void test(int board)
 {
 	Gameboard game1(board);
 	game1.printShots();
+	game1.printShips();
 }
 
 int main()
 {
 	int game = 13;
 
-	for (int i = 7; i < game; i++)
-	{
-	}
+	Gameboard game2(10);
+
+
+	int x;
+	int y;
 	
-		test(7);
+	if (game2.parseCoordinates(x, y, "A10"))
+	{
+	cout << x << " " << y << endl;
+
+	}
+
 
 	system("pause");
 }

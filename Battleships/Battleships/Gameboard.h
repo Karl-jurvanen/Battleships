@@ -1,5 +1,8 @@
 #pragma once
 #include "Ship.h"
+#include <string>
+using std::string;
+
 static const int SHIP_COUNT = 4;
 static const int SHIPS_IN_GAME[] = { 1,1,1,1 };  // number of ships of each size 5, 4, 3, 2
 
@@ -11,9 +14,12 @@ public:
 	Gameboard(int boardSize);
 	~Gameboard();
 
-	void addShip(int shipSize, int shipIndex);
+	void addShip(int shipSize, int shipIndex, string coord, string dir);
 	void printShots();
 	void printShips();
+	
+	
+	bool parseCoordinates(int& x, int& y, string input);
 
 private:
 
@@ -28,6 +34,8 @@ private:
 	//helper functions for printing game boards
 	void printHeader();
 	void printFooter();
+
+	//Function that parses user input into coordinates on the game board
 
 };
 

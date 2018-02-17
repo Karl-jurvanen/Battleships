@@ -51,9 +51,9 @@ Gameboard::~Gameboard()
 	cout << "Gameboard destructor." << endl;
 }
 
-void Gameboard::addShip(int shipSize, int shipIndex)
+void Gameboard::addShip(int shipSize, int shipIndex, string coord, string dir)
 {
-
+	
 }
 
 void Gameboard::printShots()
@@ -144,5 +144,36 @@ void Gameboard::printFooter()
 		cout << i << " ";
 	}
 	cout << endl;
+}
+
+bool Gameboard::parseCoordinates(int& x, int& y, string input)
+{
+
+	//check if input is not right length
+	
+	if (input.length() < 2 || input.length() > 3)
+	{
+		return false;
+	}
+		x = toupper(input[0]) - 'A';
+		try
+		{
+		y = stoi(input.substr(1)) - 1;
+
+		}
+		catch (const std::invalid_argument&)
+		{
+			cout << "Virheellinen syote." << endl;
+			return false;
+		}
+		
+		if ( (x < 0 || y < 0) || (x >= boardSize_ || y >= boardSize_) )
+		{
+			//one of the coordinates is outside of the game board
+			cout << "Virheellinen koordinaatti." << endl;
+			return false;
+		}
+	
+		return true;
 }
 
