@@ -14,6 +14,10 @@ public:
 	Gameboard(int boardSize);
 	~Gameboard();
 
+	char ** getShots() const;
+	int ** getShips()const;
+	size_t getBoardSize()const;
+
 	bool addShip(size_t shipSize, int shipsAdded, string coord, string dir);
 	void printShots();
 	void printShips();

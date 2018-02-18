@@ -46,6 +46,21 @@ Gameboard::~Gameboard()
 	cout << "Gameboard destructor." << endl;
 }
 
+char ** Gameboard::getShots() const
+{
+	return shots_;
+}
+
+int ** Gameboard::getShips() const
+{
+	return ships_;
+}
+
+size_t Gameboard::getBoardSize() const
+{
+	return boardSize_;
+}
+
 bool Gameboard::addShip(size_t shipSize, int shipsAdded, string coord, string dir)
 {
 	int x;
