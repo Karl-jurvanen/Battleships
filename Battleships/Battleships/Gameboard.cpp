@@ -12,7 +12,7 @@ Gameboard::Gameboard(int boardSize):boardSize_(boardSize)
 	shots_ = new char*[boardSize_];
 	ships_ = new int*[boardSize_];
 
-	for (size_t i = 0; i < boardSize_; i++)
+	for (int i = 0; i < boardSize_; i++)
 	{
 		shots_[i] = new char[boardSize_];
 		ships_[i] = new int[boardSize_];
@@ -20,9 +20,9 @@ Gameboard::Gameboard(int boardSize):boardSize_(boardSize)
 
 
 	//Initialize both gameboards to empty
-	for (size_t i = 0; i < boardSize_; i++)
+	for (int i = 0; i < boardSize_; i++)
 	{
-		for (size_t j = 0; j < boardSize_; j++)
+		for (int j = 0; j < boardSize_; j++)
 		{
 			shots_[i][j] = 0;
 			ships_[i][j] = -1;
@@ -34,7 +34,7 @@ Gameboard::Gameboard(int boardSize):boardSize_(boardSize)
 
 Gameboard::~Gameboard()
 {
-	for (size_t i = 0; i < boardSize_; i++)
+	for (int i = 0; i < boardSize_; i++)
 	{
 		delete[] shots_[i];
 		delete[] ships_[i];
@@ -56,7 +56,7 @@ int ** Gameboard::getShips() const
 	return ships_;
 }
 
-size_t Gameboard::getBoardSize() const
+int Gameboard::getBoardSize() const
 {
 	return boardSize_;
 }
@@ -181,10 +181,10 @@ void Gameboard::printShots()
 	char column = 'A';
 
 	// Print the game board with row letters on both sides
-	for (size_t i = 0; i < boardSize_; i++)
+	for (int i = 0; i < boardSize_; i++)
 	{
 		cout << column << " | ";
-		for (size_t j = 0; j < boardSize_; j++)
+		for (int j = 0; j < boardSize_; j++)
 		{
 
 			cout << shots_[i][j] << " ";
@@ -206,10 +206,10 @@ void Gameboard::printShips()
 	char column = 'A';
 
 	// Print the game board with row letters on both sides
-	for (size_t y = 0; y < boardSize_; y++)
+	for (int y = 0; y < boardSize_; y++)
 	{
 		cout << column << " | ";
-		for (size_t x = 0; x < boardSize_; x++)
+		for (int x = 0; x < boardSize_; x++)
 		{
 			if (ships_[y][x] == -1)
 			{
@@ -233,14 +233,14 @@ void Gameboard::printShips()
 void Gameboard::printHeader()
 {
 	cout << "    ";
-	for (size_t i = 1; i <= boardSize_; i++)
+	for (int i = 1; i <= boardSize_; i++)
 	{
 		cout << i << " ";
 	}
 
 	cout << endl << "  ";
 
-	for (size_t i = 0; i < boardSize_ * 2 + 4; i++)
+	for (int i = 0; i < boardSize_ * 2 + 4; i++)
 	{
 		cout << "-";
 	}
@@ -251,13 +251,13 @@ void Gameboard::printHeader()
 void Gameboard::printFooter()
 {
 	cout << "  ";
-	for (size_t i = 0; i < boardSize_ * 2 + 4; i++)
+	for (int i = 0; i < boardSize_ * 2 + 4; i++)
 	{
 		cout << "-";
 	}
 
 	cout << endl << "    ";
-	for (size_t i = 1; i <= boardSize_; i++)
+	for (int i = 1; i <= boardSize_; i++)
 	{
 		cout << i << " ";
 	}

@@ -16,7 +16,7 @@ public:
 
 	char ** getShots() const;
 	int ** getShips()const;
-	size_t getBoardSize()const;
+	int getBoardSize()const;
 
 	bool addShip(size_t shipSize, int shipsAdded, string coord, string dir);
 	void printShots();
@@ -29,7 +29,7 @@ private:
 	Ship shiplist[SHIP_COUNT];
 
 
-	size_t boardSize_;
+	int boardSize_;
 	char **shots_;
 	int ** ships_;
 
