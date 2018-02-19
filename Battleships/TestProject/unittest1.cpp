@@ -4,6 +4,11 @@
 #include "../Battleships/Gameboard.h"
 #include <iostream>
 
+const string SHIP_ALREADY_THERE = "Ship already there.\n";
+const string SHIP_OUT_OF_BOUNDS = "Ship goes off game board.\n";
+const string BAD_COORDINATE = "Virheellinen koordinaatti.\n";
+
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace TestProject
@@ -20,12 +25,9 @@ namespace TestProject
 			{
 				Gameboard testgame1(i);
 
-				std::cerr << 10 << std::endl;
-
 				Assert::AreEqual(i, testgame1.getBoardSize());
 				
 			}
-			
 			
 		}
 
@@ -42,7 +44,7 @@ namespace TestProject
 			Assert::IsTrue((oss && oss.str() == "Hello\nWorld\n"));
 		}
 
-		TEST_METHOD(Gameboard_6_Printships_empty)
+		TEST_METHOD(Gameboard_Printships_empty_6)
 		{
 			std::stringstream oss;
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
@@ -69,11 +71,10 @@ namespace TestProject
 				"    1 2 3 4 5 6 \n";
 
 
-
-			Assert::IsTrue((oss && oss.str() == expected));
+			Assert::AreEqual(output, expected);
 		}
 
-		TEST_METHOD(Gameboard_7_Printships_empty)
+		TEST_METHOD(Gameboard_Printships_empty_7)
 		{
 			std::stringstream oss;
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
@@ -100,10 +101,10 @@ namespace TestProject
 				"  ------------------\n"
 				"    1 2 3 4 5 6 7 \n";
 
-			Assert::IsTrue((oss && oss.str() == expected));
+			Assert::AreEqual(output, expected);
 		}
 
-		TEST_METHOD(Gameboard_8_Printships_empty)
+		TEST_METHOD(Gameboard_Printships_empty_8)
 		{
 			std::stringstream oss;
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
@@ -131,10 +132,10 @@ namespace TestProject
 				"  --------------------\n"
 				"    1 2 3 4 5 6 7 8 \n";
 
-			Assert::IsTrue((oss && oss.str() == expected));
+			Assert::AreEqual(output, expected);
 		}
 
-		TEST_METHOD(Gameboard_9_Printships_empty)
+		TEST_METHOD(Gameboard_Printships_empty_9)
 		{
 			std::stringstream oss;
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
@@ -163,10 +164,10 @@ namespace TestProject
 				"  ----------------------\n"
 				"    1 2 3 4 5 6 7 8 9 \n";
 
-			Assert::IsTrue((oss && oss.str() == expected));
+			Assert::AreEqual(output, expected);
 		}
 
-		TEST_METHOD(Gameboard_6_Printships_one_ship)
+		TEST_METHOD(Gameboard_Printships_one_ship_6)
 		{
 			std::stringstream oss;
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
@@ -193,10 +194,10 @@ namespace TestProject
 				"  ----------------\n"
 				"    1 2 3 4 5 6 \n";
 
-			Assert::IsTrue((oss && oss.str() == expected));
+			Assert::AreEqual(output, expected);
 		}
 
-		TEST_METHOD(Gameboard_7_Printships_one_ship)
+		TEST_METHOD(Gameboard_Printships_one_ship_7)
 		{
 			std::stringstream oss;
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
@@ -224,10 +225,10 @@ namespace TestProject
 				"  ------------------\n"
 				"    1 2 3 4 5 6 7 \n";
 
-			Assert::IsTrue((oss && oss.str() == expected));
+			Assert::AreEqual(output, expected);
 		}
 
-		TEST_METHOD(Gameboard_8_Printships_one_ship)
+		TEST_METHOD(Gameboard_Printships_one_ship_8)
 		{
 			std::stringstream oss;
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
@@ -256,10 +257,10 @@ namespace TestProject
 				"  --------------------\n"
 				"    1 2 3 4 5 6 7 8 \n";
 
-			Assert::IsTrue((oss && oss.str() == expected));
+			Assert::AreEqual(output, expected);
 		}
 
-		TEST_METHOD(Gameboard_9_Printships_one_ship)
+		TEST_METHOD(Gameboard_Printships_one_ship_9)
 		{
 			std::stringstream oss;
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
@@ -289,7 +290,115 @@ namespace TestProject
 				"  ----------------------\n"
 				"    1 2 3 4 5 6 7 8 9 \n";
 
-			Assert::IsTrue((oss && oss.str() == expected));
+			Assert::AreEqual(output, expected);
+		}
+
+
+		//Test output when user tries to add ship on top of another ship
+		//Expected result is an error message
+		TEST_METHOD(Gameboard_Overlapping_Ships_6)
+		{
+			std::stringstream oss;
+			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+			std::cout.rdbuf(oss.rdbuf());
+
+			Gameboard game(6);
+
+			game.addShip(5, 1, "A1", "e");
+			game.addShip(5, 1, "A1", "e");
+			
+
+			string output = oss.str();
+			//Logger::WriteMessage(output);
+			std::cout.rdbuf(p_cout_streambuf);
+
+			string expected = SHIP_ALREADY_THERE;
+
+			Assert::AreEqual(output, expected);
+		}
+
+		TEST_METHOD(Gameboard_Overlapping_Ships_7)
+		{
+			std::stringstream oss;
+			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+			std::cout.rdbuf(oss.rdbuf());
+
+			Gameboard game(7);
+
+			game.addShip(5, 1, "A6", "e");
+			game.addShip(5, 1, "C6", "e");
+
+
+			string output = oss.str();
+			//Logger::WriteMessage(output);
+			std::cout.rdbuf(p_cout_streambuf);
+
+			string expected = SHIP_ALREADY_THERE;
+
+			Assert::AreEqual(output, expected);
+		}
+
+		TEST_METHOD(Gameboard_Ship_Out_Of_Bounds_6)
+		{
+			std::stringstream oss;
+			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+			std::cout.rdbuf(oss.rdbuf());
+
+			Gameboard game(6);
+
+			game.addShip(5, 1, "A6", "p");
+			
+
+
+			string output = oss.str();
+			//Logger::WriteMessage(output);
+			std::cout.rdbuf(p_cout_streambuf);
+
+			string expected = SHIP_OUT_OF_BOUNDS;
+
+			Assert::AreEqual(output, expected);
+		}
+
+		TEST_METHOD(Gameboard_Ship_Out_Of_Bounds_7)
+		{
+			std::stringstream oss;
+			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+			std::cout.rdbuf(oss.rdbuf());
+
+			Gameboard game(7);
+
+			game.addShip(5, 1, "G7", "i");
+
+
+
+			string output = oss.str();
+			//Logger::WriteMessage(output);
+			std::cout.rdbuf(p_cout_streambuf);
+
+			string expected = "Ship goes off game board.\n";
+
+			Assert::AreEqual(output, expected);
+		}
+
+		TEST_METHOD(Gameboard_Bad_Coordinate_7)
+		{
+			std::stringstream oss;
+			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+			std::cout.rdbuf(oss.rdbuf());
+
+			Gameboard game(7);
+
+			game.addShip(5, 1, "H7", "i");
+
+
+			string output = oss.str();
+			//Logger::WriteMessage(output);
+			std::cout.rdbuf(p_cout_streambuf);
+
+			string expected = "Virheellinen koordinaatti.\n";
+
+			Assert::AreEqual(output, expected);
+			//Assert::IsTrue((oss && oss.str() == expected));
 		}
 	};
 }
