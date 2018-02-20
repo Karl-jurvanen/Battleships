@@ -390,15 +390,29 @@ namespace TestProject
 
 			game.addShip(5, 1, "H7", "i");
 
-
 			string output = oss.str();
-			//Logger::WriteMessage(output);
 			std::cout.rdbuf(p_cout_streambuf);
 
 			string expected = "Virheellinen koordinaatti.\n";
 
 			Assert::AreEqual(output, expected);
-			//Assert::IsTrue((oss && oss.str() == expected));
+		}
+
+		TEST_METHOD(cin_test)
+		{
+			// For testing functions with user inputs.
+			// redirecting cin buffer to stringstream so the test can simulate user input
+			std::streambuf* p_cin_streambuf = std::cin.rdbuf();
+			std::stringstream input("testing\nasdasdasd");
+
+			std::cin.rdbuf(input.rdbuf());
+
+			string test;
+
+			std::getline(std::cin, test);
+			std::getline(std::cin, test);
+
+			std::cin.rdbuf(p_cin_streambuf);
 		}
 	};
 }
