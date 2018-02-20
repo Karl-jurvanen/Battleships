@@ -6,7 +6,7 @@ using std::cin;
 using std::endl;
 
 
-Gameboard::Gameboard(int boardSize):boardSize_(boardSize)
+Gameboard::Gameboard(int boardSize) :boardSize_(boardSize)
 {
 
 	shots_ = new char*[boardSize_];
@@ -65,14 +65,14 @@ bool Gameboard::addShip(size_t shipSize, int shipsAdded, string coord, string di
 {
 	int x;
 	int y;
-	if (parseCoordinates(x,y,coord))
+	if (parseCoordinates(x, y, coord))
 	{
 
 		if (dir == "p")
 		{
 			for (size_t i = 0; i < shipSize; i++)
 			{
-				if (! checkCoordinate(x, (y-i)))
+				if (!checkCoordinate(x, (y - i)))
 				{
 					cout << "Ship goes off game board." << endl;
 					return false;
@@ -82,27 +82,27 @@ bool Gameboard::addShip(size_t shipSize, int shipsAdded, string coord, string di
 					cout << "Ship already there." << endl;
 					return false;
 				}
-				
+
 			}
 			shiplist[shipsAdded].setSize(shipSize);
 			for (size_t i = 0; i < shipSize; i++)
 			{
-				ships_[y-i][x] = shipsAdded;
+				ships_[y - i][x] = shipsAdded;
 			}
 			return true;
-			
+
 		}
 
 		else if (dir == "i")
 		{
 			for (size_t i = 0; i < shipSize; i++)
 			{
-				if (!checkCoordinate( (x +i), y))
+				if (!checkCoordinate((x + i), y))
 				{
 					cout << "Ship goes off game board." << endl;
 					return false;
 				}
-				if (ships_[y][x+i] != -1)
+				if (ships_[y][x + i] != -1)
 				{
 					cout << "Ship already there." << endl;
 					return false;
@@ -112,7 +112,7 @@ bool Gameboard::addShip(size_t shipSize, int shipsAdded, string coord, string di
 			shiplist[shipsAdded].setSize(shipSize);
 			for (size_t i = 0; i < shipSize; i++)
 			{
-				ships_[y][x +i] = shipsAdded;
+				ships_[y][x + i] = shipsAdded;
 			}
 			return true;
 		}
@@ -145,12 +145,12 @@ bool Gameboard::addShip(size_t shipSize, int shipsAdded, string coord, string di
 		{
 			for (size_t i = 0; i < shipSize; i++)
 			{
-				if (!checkCoordinate( (x-i), y))
+				if (!checkCoordinate((x - i), y))
 				{
 					cout << "Ship goes off game board." << endl;
 					return false;
 				}
-				if (ships_[y][x-i] != -1)
+				if (ships_[y][x - i] != -1)
 				{
 					cout << "Ship already there." << endl;
 					return false;
@@ -160,7 +160,7 @@ bool Gameboard::addShip(size_t shipSize, int shipsAdded, string coord, string di
 			shiplist[shipsAdded].setSize(shipSize);
 			for (size_t i = 0; i < shipSize; i++)
 			{
-				ships_[y][x-i] = shipsAdded;
+				ships_[y][x - i] = shipsAdded;
 			}
 			return true;
 		}
@@ -217,13 +217,13 @@ void Gameboard::printShips()
 			}
 			else
 			{
-				
+
 				cout << shiplist[ships_[y][x]].getSize() << " ";
 			}
 		}
 
 		cout << " | " << column << endl;
-		column++;	
+		column++;
 	}
 
 	printFooter();
@@ -268,31 +268,36 @@ bool Gameboard::parseCoordinates(int& x, int& y, string input)
 {
 
 	//check if input is not right length
-	
+
 	if (input.length() < 2 || input.length() > 3)
 	{
 		return false;
 	}
-		y = toupper(input[0]) - 'A';
-		try
-		{
+	//First character of input corresponds to y coordinate and 
+	//second and trird to x-coordinate
+
+	y = toupper(input[0]) - 'A';
+	try
+	{
 		x = stoi(input.substr(1)) - 1;
 
-		}
-		catch (const std::invalid_argument&)
-		{
-			cout << "Virheellinen syote." << endl;
-			return false;
-		}
-		
-		if (! checkCoordinate(x,y) )
-		{
-			//one of the coordinates is outside of the game board
-			cout << "Virheellinen koordinaatti." << endl;
-			return false;
-		}
-	
-		return true;
+	}
+	catch (const std::invalid_argument&)
+	{
+		//catch possible exception from converting the string to int
+		cout << "Virheellinen syote." << endl;
+		return false;
+	}
+
+	if (!checkCoordinate(x, y))
+	{
+		//one of the coordinates is outside of the game board
+		cout << "Virheellinen koordinaatti." << endl;
+		return false;
+	}
+
+
+	return true;
 }
 
 //Function returns true if coordinate is within the gameboard
