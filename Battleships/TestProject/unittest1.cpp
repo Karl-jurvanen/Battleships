@@ -175,7 +175,7 @@ namespace TestProject
 
 			Gameboard game(6);
 
-			game.addShip(5, 1, "A1", "e");
+			game.addShip(5,  "A1", "e");
 			game.printShips();
 
 			string output = oss.str();
@@ -205,7 +205,7 @@ namespace TestProject
 
 			Gameboard game(7);
 
-			game.addShip(5,1,"A1","e");
+			game.addShip(5, "A1","e");
 			game.printShips();
 
 			string output = oss.str();
@@ -236,7 +236,7 @@ namespace TestProject
 
 			Gameboard game(8);
 
-			game.addShip(5, 1, "A1", "e");
+			game.addShip(5,  "A1", "e");
 			game.printShips();
 
 			string output = oss.str();
@@ -268,7 +268,7 @@ namespace TestProject
 
 			Gameboard game(9);
 
-			game.addShip(5, 1, "A1", "e");
+			game.addShip(5, "A1", "e");
 			game.printShips();
 
 			string output = oss.str();
@@ -304,8 +304,8 @@ namespace TestProject
 
 			Gameboard game(6);
 
-			game.addShip(5, 1, "A1", "e");
-			game.addShip(5, 1, "A1", "e");
+			game.addShip(5, "A1", "e");
+			game.addShip(5, "A1", "e");
 			
 
 			string output = oss.str();
@@ -325,8 +325,8 @@ namespace TestProject
 
 			Gameboard game(7);
 
-			game.addShip(5, 1, "A6", "e");
-			game.addShip(5, 1, "C6", "e");
+			game.addShip(5, "A6", "e");
+			game.addShip(5, "C6", "e");
 
 
 			string output = oss.str();
@@ -346,7 +346,7 @@ namespace TestProject
 
 			Gameboard game(6);
 
-			game.addShip(5, 1, "A6", "p");
+			game.addShip(5, "A6", "p");
 			
 
 
@@ -367,7 +367,7 @@ namespace TestProject
 
 			Gameboard game(7);
 
-			game.addShip(5, 1, "G7", "i");
+			game.addShip(5, "G7", "i");
 
 
 
@@ -388,7 +388,7 @@ namespace TestProject
 
 			Gameboard game(7);
 
-			game.addShip(5, 1, "H7", "i");
+			game.addShip(5, "H7", "i");
 
 			string output = oss.str();
 			std::cout.rdbuf(p_cout_streambuf);
