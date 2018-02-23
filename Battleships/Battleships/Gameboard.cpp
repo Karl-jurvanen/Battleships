@@ -6,7 +6,7 @@ using std::cin;
 using std::endl;
 
 
-Gameboard::Gameboard(int boardSize) :boardSize_(boardSize)
+Gameboard::Gameboard(int boardSize) :boardSize_(boardSize), shipsAdded_(0)
 {
 
 	shots_ = new char*[boardSize_];
@@ -62,7 +62,7 @@ int Gameboard::getBoardSize() const
 	return boardSize_;
 }
 
-bool Gameboard::addShip(size_t shipSize, int shipsAdded, string coord, string dir)
+bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 {
 	int x;
 	int y;
@@ -85,11 +85,12 @@ bool Gameboard::addShip(size_t shipSize, int shipsAdded, string coord, string di
 				}
 
 			}
-			shiplist[shipsAdded].setSize(shipSize);
+			shiplist[shipsAdded_].setSize(shipSize);
 			for (size_t i = 0; i < shipSize; i++)
 			{
-				ships_[y - i][x] = shipsAdded;
+				ships_[y - i][x] = shipsAdded_;
 			}
+			shipsAdded_++;
 			return true;
 
 		}
@@ -110,11 +111,12 @@ bool Gameboard::addShip(size_t shipSize, int shipsAdded, string coord, string di
 				}
 
 			}
-			shiplist[shipsAdded].setSize(shipSize);
+			shiplist[shipsAdded_].setSize(shipSize);
 			for (size_t i = 0; i < shipSize; i++)
 			{
-				ships_[y][x + i] = shipsAdded;
+				ships_[y][x + i] = shipsAdded_;
 			}
+			shipsAdded_++;
 			return true;
 		}
 
@@ -134,11 +136,12 @@ bool Gameboard::addShip(size_t shipSize, int shipsAdded, string coord, string di
 				}
 
 			}
-			shiplist[shipsAdded].setSize(shipSize);
+			shiplist[shipsAdded_].setSize(shipSize);
 			for (size_t i = 0; i < shipSize; i++)
 			{
-				ships_[y + i][x] = shipsAdded;
+				ships_[y + i][x] = shipsAdded_;
 			}
+			shipsAdded_++;
 			return true;
 		}
 
@@ -158,11 +161,12 @@ bool Gameboard::addShip(size_t shipSize, int shipsAdded, string coord, string di
 				}
 
 			}
-			shiplist[shipsAdded].setSize(shipSize);
+			shiplist[shipsAdded_].setSize(shipSize);
 			for (size_t i = 0; i < shipSize; i++)
 			{
-				ships_[y][x - i] = shipsAdded;
+				ships_[y][x - i] = shipsAdded_;
 			}
+			shipsAdded_++;
 			return true;
 		}
 		else
@@ -221,7 +225,19 @@ bool Gameboard::shoot(string coord)
 
 void Gameboard::sinkShip(int shipIndes)
 {
-	cout << "SinkShip" << endl;
+	//Loop through shots_ and change value to # where ships_ == shipindex
+	
+	for (int y = 0; y < boardSize_; y++)
+	{
+		for (int x = 0; x < boardSize_; x++)
+		{
+			if (ships_[y][x] == shipIndes)
+			{
+				shots_[y][x] = '#';
+			}
+		}
+	}
+
 }
 
 void Gameboard::printShots()

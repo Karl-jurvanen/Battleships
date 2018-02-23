@@ -18,7 +18,7 @@ public:
 	int ** getShips()const;
 	int getBoardSize()const;
 
-	bool addShip(size_t shipSize, int shipsAdded, string coord, string dir);
+	bool addShip(size_t shipSize,  string coord, string dir);
 	bool shoot(string coord);
 	void sinkShip(int shipIndes);
 	void printShots();
@@ -30,7 +30,7 @@ private:
 	//list of all ships that have been added to the gameboard
 	Ship shiplist[SHIP_COUNT];
 
-
+	int shipsAdded_;
 	int boardSize_;
 	char **shots_;
 	int ** ships_;

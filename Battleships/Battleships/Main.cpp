@@ -20,12 +20,12 @@ int main()
 	Gameboard game2(7);
 
 	game2.printShips();
-	game2.addShip(5, 1, "G6", "p");
-	game2.addShip(4, 2, "G5", "l");
-	game2.addShip(4, 2, "A1", "e");
-	game2.addShip(3, 3, "A4", "e");
+	game2.addShip(5, "G6", "p");
+	game2.addShip(4, "G5", "l");
+	game2.addShip(4, "A1", "e");
+	game2.addShip(3, "A4", "e");
 	game2.printShips();
-
+   
 	game2.shoot("A1");
 	game2.shoot("A1");
 	game2.shoot("B2");
