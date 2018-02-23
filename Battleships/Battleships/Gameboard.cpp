@@ -78,7 +78,7 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 					cout << "Ship goes off game board." << endl;
 					return false;
 				}
-				if (ships_[y - i][x] != -1)
+				if (ships_[x][y-i] != -1)
 				{
 					cout << "Ship already there." << endl;
 					return false;
@@ -88,7 +88,7 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 			shiplist[shipsAdded_].setSize(shipSize);
 			for (size_t i = 0; i < shipSize; i++)
 			{
-				ships_[y - i][x] = shipsAdded_;
+				ships_[x][y-i] = shipsAdded_;
 			}
 			shipsAdded_++;
 			return true;
@@ -104,7 +104,7 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 					cout << "Ship goes off game board." << endl;
 					return false;
 				}
-				if (ships_[y][x + i] != -1)
+				if (ships_[x+i][y] != -1)
 				{
 					cout << "Ship already there." << endl;
 					return false;
@@ -114,7 +114,7 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 			shiplist[shipsAdded_].setSize(shipSize);
 			for (size_t i = 0; i < shipSize; i++)
 			{
-				ships_[y][x + i] = shipsAdded_;
+				ships_[x+i][y] = shipsAdded_;
 			}
 			shipsAdded_++;
 			return true;
@@ -129,7 +129,7 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 					cout << "Ship goes off game board." << endl;
 					return false;
 				}
-				if (ships_[y + i][x] != -1)
+				if (ships_[x][y+i] != -1)
 				{
 					cout << "Ship already there." << endl;
 					return false;
@@ -139,7 +139,7 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 			shiplist[shipsAdded_].setSize(shipSize);
 			for (size_t i = 0; i < shipSize; i++)
 			{
-				ships_[y + i][x] = shipsAdded_;
+				ships_[x][y+i] = shipsAdded_;
 			}
 			shipsAdded_++;
 			return true;
@@ -154,7 +154,7 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 					cout << "Ship goes off game board." << endl;
 					return false;
 				}
-				if (ships_[y][x - i] != -1)
+				if (ships_[x-i][y] != -1)
 				{
 					cout << "Ship already there." << endl;
 					return false;
@@ -164,7 +164,7 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 			shiplist[shipsAdded_].setSize(shipSize);
 			for (size_t i = 0; i < shipSize; i++)
 			{
-				ships_[y][x - i] = shipsAdded_;
+				ships_[x-i][y] = shipsAdded_;
 			}
 			shipsAdded_++;
 			return true;
@@ -185,15 +185,15 @@ bool Gameboard::shoot(string coord)
 	if (parseCoordinates(x, y, coord))
 	{
 		//check if we the coordinate has already been shot at
-		if (shots_[y][x] != 0)
+		if (shots_[x][y] != 0)
 		{
-			cout << coord << " |Already shot there." << endl;
+			cout << coord << " | Already shot there." << endl;
 			return false;
 		}
 		else
 		{
 			//Check if there is ship there
-			if (ships_[y][x] == -1)
+			if (ships_[x][y] == -1)
 			{
 				cout << coord <<  " | Miss." << endl;
 				shots_[y][x] = 'X';
@@ -202,19 +202,19 @@ bool Gameboard::shoot(string coord)
 			else
 			{
 				
-				int target = ships_[y][x];
+				int target = ships_[x][y];
 				shiplist[target].hit();
 				//Check if the target that was hit sinks 
 				if (shiplist[target].getHits() == shiplist[target].getSize())
 				{
-					cout << coord << " Ship sunk" << endl;
+					cout << coord << " | Ship sunk" << endl;
 					sinkShip(target);
 				}
 				else
 					//Ship was hit but it did not sink
 				{
-					cout << coord << " |Hit" << endl;
-					shots_[y][x] = '*';
+					cout << coord << " | Hit" << endl;
+					shots_[x][y] = '*';
 				}
 				return true;
 			}
@@ -231,9 +231,9 @@ void Gameboard::sinkShip(int shipIndes)
 	{
 		for (int x = 0; x < boardSize_; x++)
 		{
-			if (ships_[y][x] == shipIndes)
+			if (ships_[x][y] == shipIndes)
 			{
-				shots_[y][x] = '#';
+				shots_[x][y] = '#';
 			}
 		}
 	}
@@ -248,12 +248,11 @@ void Gameboard::printShots()
 	char column = 'A';
 
 	// Print the game board with row letters on both sides
-	for (int i = 0; i < boardSize_; i++)
+	for (int j = 0; j < boardSize_; j++)
 	{
 		cout << column << " | ";
-		for (int j = 0; j < boardSize_; j++)
+		for (int i = 0; i < boardSize_; i++)
 		{
-
 			cout << shots_[i][j] << " ";
 		}
 
@@ -263,7 +262,6 @@ void Gameboard::printShots()
 
 	printFooter();
 
-
 }
 
 void Gameboard::printShips()
@@ -271,21 +269,20 @@ void Gameboard::printShips()
 	printHeader();
 
 	char column = 'A';
-
+	
 	// Print the game board with row letters on both sides
 	for (int y = 0; y < boardSize_; y++)
 	{
 		cout << column << " | ";
 		for (int x = 0; x < boardSize_; x++)
 		{
-			if (ships_[y][x] == -1)
+			if (ships_[x][y] == -1)
 			{
 				cout << "  ";
 			}
 			else
 			{
-
-				cout << shiplist[ships_[y][x]].getSize() << " ";
+				cout << shiplist[ships_[x][y]].getSize() << " ";
 			}
 		}
 
@@ -362,8 +359,6 @@ bool Gameboard::parseCoordinates(int& x, int& y, string input)
 		cout << "Virheellinen koordinaatti." << endl;
 		return false;
 	}
-
-
 	return true;
 }
 
