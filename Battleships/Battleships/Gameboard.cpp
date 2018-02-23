@@ -29,6 +29,7 @@ Gameboard::Gameboard(int boardSize) :boardSize_(boardSize)
 		}
 	}
 
+
 }
 
 
@@ -171,6 +172,56 @@ bool Gameboard::addShip(size_t shipSize, int shipsAdded, string coord, string di
 		}
 	}
 	return false;
+}
+
+bool Gameboard::shoot(string coord)
+{
+	int x;
+	int y;
+	if (parseCoordinates(x, y, coord))
+	{
+		//check if we the coordinate has already been shot at
+		if (shots_[y][x] != 0)
+		{
+			cout << coord << " |Already shot there." << endl;
+			return false;
+		}
+		else
+		{
+			//Check if there is ship there
+			if (ships_[y][x] == -1)
+			{
+				cout << coord <<  " | Miss." << endl;
+				shots_[y][x] = 'X';
+				return true;
+			}
+			else
+			{
+				
+				int target = ships_[y][x];
+				shiplist[target].hit();
+				//Check if the target that was hit sinks 
+				if (shiplist[target].getHits() == shiplist[target].getSize())
+				{
+					cout << coord << " Ship sunk" << endl;
+					sinkShip(target);
+				}
+				else
+					//Ship was hit but it did not sink
+				{
+					cout << coord << " |Hit" << endl;
+					shots_[y][x] = '*';
+				}
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+void Gameboard::sinkShip(int shipIndes)
+{
+	cout << "SinkShip" << endl;
 }
 
 void Gameboard::printShots()
