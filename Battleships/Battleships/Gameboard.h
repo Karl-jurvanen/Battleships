@@ -21,8 +21,8 @@ public:
 	bool addShip(size_t shipSize,  string coord, string dir);
 	bool shoot(string coord);
 	void sinkShip(int shipIndes);
-	void printShots();
-	void printShips();
+	void printShots() const;
+	void printShips() const;
 	
 	
 private:
@@ -37,12 +37,12 @@ private:
 
 
 	//helper functions for printing game boards
-	void printHeader();
-	void printFooter();
+	void printHeader() const;
+	void printFooter() const;
 
 	//Function that parses user input into coordinates on the game board
-	bool parseCoordinates(int& x, int& y, string input);
-	bool checkCoordinate(int x, int y);
+	bool parseCoordinates(int& x, int& y, string input) const;
+	bool checkCoordinate(int x, int y) const;
 
 };
 

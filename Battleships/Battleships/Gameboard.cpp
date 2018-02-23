@@ -240,7 +240,7 @@ void Gameboard::sinkShip(int shipIndes)
 
 }
 
-void Gameboard::printShots()
+void Gameboard::printShots() const
 {
 
 	printHeader();
@@ -264,7 +264,7 @@ void Gameboard::printShots()
 
 }
 
-void Gameboard::printShips()
+void Gameboard::printShips() const
 {
 	printHeader();
 
@@ -294,7 +294,7 @@ void Gameboard::printShips()
 }
 
 //Function that prints the top rows of gameboard
-void Gameboard::printHeader()
+void Gameboard::printHeader() const
 {
 	cout << "    ";
 	for (int i = 1; i <= boardSize_; i++)
@@ -312,7 +312,7 @@ void Gameboard::printHeader()
 }
 
 //Function that prints the bottom rows of gameboard
-void Gameboard::printFooter()
+void Gameboard::printFooter() const
 {
 	cout << "  ";
 	for (int i = 0; i < boardSize_ * 2 + 4; i++)
@@ -328,7 +328,7 @@ void Gameboard::printFooter()
 	cout << endl;
 }
 
-bool Gameboard::parseCoordinates(int& x, int& y, string input)
+bool Gameboard::parseCoordinates(int& x, int& y, string input) const
 {
 
 	//check if input is not right length
@@ -363,7 +363,7 @@ bool Gameboard::parseCoordinates(int& x, int& y, string input)
 }
 
 //Function returns true if coordinate is within the gameboard
-bool Gameboard::checkCoordinate(int x, int y)
+bool Gameboard::checkCoordinate(int x, int y) const
 {
 
 	return  ((x >= 0 && y >= 0) && (x < boardSize_ && y < boardSize_));
