@@ -75,12 +75,12 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 			{
 				if (!checkCoordinate(x, (y - i)))
 				{
-					cout << "Ship goes off game board." << endl;
+					cout << SHIP_OUT_OF_BOUNDS ;
 					return false;
 				}
 				if (ships_[x][y-i] != -1)
 				{
-					cout << "Ship already there." << endl;
+					cout << SHIP_ALREADY_THERE ;
 					return false;
 				}
 
@@ -101,12 +101,12 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 			{
 				if (!checkCoordinate((x + i), y))
 				{
-					cout << "Ship goes off game board." << endl;
+					cout << SHIP_OUT_OF_BOUNDS ;
 					return false;
 				}
 				if (ships_[x+i][y] != -1)
 				{
-					cout << "Ship already there." << endl;
+					cout << SHIP_ALREADY_THERE;
 					return false;
 				}
 
@@ -126,12 +126,12 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 			{
 				if (!checkCoordinate(x, (y + i)))
 				{
-					cout << "Ship goes off game board." << endl;
+					cout << SHIP_OUT_OF_BOUNDS ;
 					return false;
 				}
 				if (ships_[x][y+i] != -1)
 				{
-					cout << "Ship already there." << endl;
+					cout << SHIP_ALREADY_THERE ;
 					return false;
 				}
 
@@ -151,12 +151,12 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 			{
 				if (!checkCoordinate((x - i), y))
 				{
-					cout << "Ship goes off game board." << endl;
+					cout << SHIP_OUT_OF_BOUNDS << endl;
 					return false;
 				}
 				if (ships_[x-i][y] != -1)
 				{
-					cout << "Ship already there." << endl;
+					cout << SHIP_ALREADY_THERE << endl;
 					return false;
 				}
 
@@ -182,12 +182,14 @@ bool Gameboard::shoot(string coord)
 {
 	int x;
 	int y;
+	string output;
 	if (parseCoordinates(x, y, coord))
 	{
 		//check if we the coordinate has already been shot at
 		if (shots_[x][y] != 0)
 		{
-			cout << coord << " | Already shot there." << endl;
+			output = ALREADY_SHOT_THERE;
+			cout << output.insert(8, coord) << endl;
 			return false;
 		}
 		else
@@ -195,7 +197,8 @@ bool Gameboard::shoot(string coord)
 			//Check if there is ship there
 			if (ships_[x][y] == -1)
 			{
-				cout << coord <<  " | Miss." << endl;
+				output = MISSED_SHIP;
+				cout << output.insert(16, coord) << endl;
 				shots_[y][x] = 'X';
 				return true;
 			}
@@ -207,13 +210,15 @@ bool Gameboard::shoot(string coord)
 				//Check if the target that was hit sinks 
 				if (shiplist[target].getHits() == shiplist[target].getSize())
 				{
-					cout << coord << " | Ship sunk" << endl;
+					output = SUNK_SHIP;
+					cout << output.insert(16, coord) << endl;
 					sinkShip(target);
 				}
 				else
 					//Ship was hit but it did not sink
 				{
-					cout << coord << " | Hit" << endl;
+					output = HIT_SHIP;
+					cout << output.insert(16, coord) << endl;
 					shots_[x][y] = '*';
 				}
 				return true;
@@ -356,7 +361,7 @@ bool Gameboard::parseCoordinates(int& x, int& y, string input) const
 	if (!checkCoordinate(x, y))
 	{
 		//one of the coordinates is outside of the game board
-		cout << "Virheellinen koordinaatti." << endl;
+		cout << BAD_COORDINATE ;
 		return false;
 	}
 	return true;
