@@ -211,14 +211,14 @@ bool Gameboard::shoot(string coord)
 				if (shiplist[target].getHits() == shiplist[target].getSize())
 				{
 					output = SUNK_SHIP;
-					cout << output.insert(16, coord) << endl;
+					cout << output.insert(16, coord) ;
 					sinkShip(target);
 				}
 				else
 					//Ship was hit but it did not sink
 				{
 					output = HIT_SHIP;
-					cout << output.insert(16, coord) << endl;
+					cout << output.insert(16, coord);
 					shots_[x][y] = '*';
 				}
 				return true;
