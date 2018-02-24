@@ -198,7 +198,7 @@ bool Gameboard::shoot(string coord)
 			if (ships_[x][y] == -1)
 			{
 				output = MISSED_SHIP;
-				cout << output.insert(16, coord) << endl;
+				cout << output.insert(16, coord);
 				shots_[y][x] = 'X';
 				return true;
 			}
