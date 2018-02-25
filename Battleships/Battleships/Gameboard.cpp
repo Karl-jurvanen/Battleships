@@ -6,6 +6,23 @@ using std::cin;
 using std::endl;
 
 
+Gameboard::Gameboard():boardSize_(7),shipCount_(4),shipsAdded_(0)
+{
+	shiplist_ = new Ship[shipCount_];
+
+	shots_ = new char*[boardSize_];
+	ships_ = new int*[boardSize_];
+
+	for (int i = 0; i < boardSize_; i++)
+	{
+		shots_[i] = new char[boardSize_];
+		ships_[i] = new int[boardSize_];
+	}
+
+	//Initialize both gameboards to empty
+	initialize();
+}
+
 Gameboard::Gameboard(int boardSize, int shipCount) :boardSize_(boardSize), shipCount_(shipCount), shipsAdded_(0)
 {
 	shiplist_ = new Ship[shipCount_];

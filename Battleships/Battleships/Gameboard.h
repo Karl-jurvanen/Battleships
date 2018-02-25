@@ -18,6 +18,7 @@ enum Direction { North, East, South, West };
 class Gameboard
 {
 public:
+	Gameboard();
 	Gameboard(int boardSize, int shipCount);
 	~Gameboard();
 
