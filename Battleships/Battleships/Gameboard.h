@@ -26,6 +26,7 @@ public:
 	int ** getShips()const;
 	int getBoardSize()const;
 
+	void initialize();
 	bool addShip(size_t shipSize,  string coord, string dir);
 	bool shoot(string coord);
 	void sinkShip(int shipIndes);

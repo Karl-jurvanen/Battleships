@@ -18,18 +18,8 @@ Gameboard::Gameboard(int boardSize) :boardSize_(boardSize), shipsAdded_(0)
 		ships_[i] = new int[boardSize_];
 	}
 
-
 	//Initialize both gameboards to empty
-	for (int i = 0; i < boardSize_; i++)
-	{
-		for (int j = 0; j < boardSize_; j++)
-		{
-			shots_[i][j] = 0;
-			ships_[i][j] = -1;
-		}
-	}
-
-
+	initialize();
 }
 
 
@@ -61,13 +51,32 @@ int Gameboard::getBoardSize() const
 	return boardSize_;
 }
 
+//Initialize the gameboards to empty state
+void Gameboard::initialize()
+{
+	for (int i = 0; i < boardSize_; i++)
+	{
+		for (int j = 0; j < boardSize_; j++)
+		{
+			shots_[i][j] = 0;
+			ships_[i][j] = -1;
+			
+		}
+	}
+	shipsAdded_ = 0;
+	for (int i = 0; i < SHIP_COUNT; i++)
+	{
+		shiplist[i] = Ship();	
+	}
+}
+
 bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 {
 	int x;
 	int y;
 	if (parseCoordinates(x, y, coord))
 	{
-
+		
 		if (dir == "p")
 		{
 			for (size_t i = 0; i < shipSize; i++)
@@ -177,6 +186,8 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 	return false;
 }
 
+//Shoot function retuens true if shooting is succesfull (hit or miss)
+//and returns false if shooting failed (illegal coordinate or shooting in the same spot again)
 bool Gameboard::shoot(string coord)
 {
 	int x;
@@ -286,6 +297,10 @@ void Gameboard::printShips() const
 			}
 			else
 			{
+				//print shipnumbers
+				//cout << ships_[x][y] << " ";
+
+				//print ship sizes
 				cout << shiplist[ships_[x][y]].getSize() << " ";
 			}
 		}

@@ -13,8 +13,6 @@ namespace TestProject
 	{
 	public:
 
-		
-		
 		TEST_METHOD(Gameboard_constructor_boardsize)
 		{
 			int test1 = 10;
@@ -27,6 +25,38 @@ namespace TestProject
 				
 			}
 			
+		}
+
+		TEST_METHOD(Gameboard_initialize)
+		{
+			std::stringstream oss;
+			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+			std::cout.rdbuf(oss.rdbuf());
+
+			Gameboard game(7);
+
+			game.addShip(5,"a1","e");
+			game.initialize();
+			game.printShips();
+
+			string output = oss.str();
+			//Logger::WriteMessage(output);
+			std::cout.rdbuf(p_cout_streambuf);
+
+			string expected =
+				"    1 2 3 4 5 6 7 \n"
+				"  ------------------\n"
+				"A |                | A\n"
+				"B |                | B\n"
+				"C |                | C\n"
+				"D |                | D\n"
+				"E |                | E\n"
+				"F |                | F\n"
+				"G |                | G\n"
+				"  ------------------\n"
+				"    1 2 3 4 5 6 7 \n";
+
+			Assert::AreEqual(output, expected);
 		}
 
 		TEST_METHOD(TestMethod2)

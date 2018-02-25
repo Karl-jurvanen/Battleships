@@ -5,7 +5,7 @@
 using std::cout;
 using std::cin;
 using std::endl;
-
+using std::getline;
 
 
 void test(int board)
@@ -17,35 +17,41 @@ void test(int board)
 
 int main()
 {
-	Gameboard game2(8);
+	Gameboard game2(9);
 
 	game2.printShips();
 	game2.addShip(5, "G6", "p");
-	game2.addShip(4, "G5", "l");
-	game2.addShip(4, "D1", "e");
-	game2.addShip(3, "A4", "e");
 	game2.printShips();
+	game2.addShip(4, "G5", "l");
+	game2.printShips();
+	game2.addShip(4, "e1", "e");
+	game2.printShips();
+	game2.addShip(4, "A1", "e");
+	game2.printShips();
+
    
-	game2.shoot("A1");
-	game2.shoot("A1");
-	game2.shoot("B2");
+	while (true)
+	{
+		string input;
+		cout << "Anna ampumakoordinaatit: ";
+		getline(cin, input);
 
-	game2.shoot("G1");
-	game2.shoot("G2");
-	game2.shoot("G3");
-	game2.shoot("G4");
-	game2.shoot("G5");
-	game2.shoot("G6");
-
-	game2.shoot("A1");
-	game2.shoot("b1");
-	game2.shoot("c1");
-	game2.shoot("d1");
-	game2.shoot("e1");
-
-	game2.shoot("F1");
-
-	game2.shoot("G11");
+		if (input == "\\@")
+		{
+			game2.printShips();		
+		}
+		else if (input == "n")
+		{
+			//Zero the gameboard for a new game
+			game2.initialize();
+			game2.addShip(4, "G5", "l");
+		}
+		else
+		{
+			game2.shoot(input);
+			game2.printShots();
+		}
+	}
 
 	game2.printShots();
 	system("pause");
