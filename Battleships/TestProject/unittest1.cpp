@@ -4,10 +4,6 @@
 #include "../Battleships/Gameboard.h"
 #include <iostream>
 
-const string SHIP_ALREADY_THERE = "Ship already there.\n";
-const string SHIP_OUT_OF_BOUNDS = "Ship goes off game board.\n";
-const string BAD_COORDINATE = "Virheellinen koordinaatti.\n";
-
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -16,6 +12,8 @@ namespace TestProject
 	TEST_CLASS(UnitTest1)
 	{
 	public:
+
+		
 		
 		TEST_METHOD(Gameboard_constructor_boardsize)
 		{
@@ -413,6 +411,68 @@ namespace TestProject
 			std::getline(std::cin, test);
 
 			std::cin.rdbuf(p_cin_streambuf);
+		}
+
+		TEST_METHOD(Gameboard_shoot_miss)
+		{
+			std::stringstream oss;
+			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+			std::cout.rdbuf(oss.rdbuf());
+
+			Gameboard game(7);
+
+			game.addShip(5, "A1", "e");
+			string coordinate = "B2";
+			game.shoot(coordinate);
+
+			string output = oss.str();
+
+			std::cout.rdbuf(p_cout_streambuf);
+
+			string expected = MISSED_SHIP;
+			expected.insert(16, coordinate);
+			Assert::AreEqual(output, expected);
+		}
+
+		TEST_METHOD(Gameboard_shoot_hit)
+		{
+			std::stringstream oss;
+			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+			std::cout.rdbuf(oss.rdbuf());
+
+			Gameboard game(7);
+
+			game.addShip(5, "A1", "e");
+			string coordinate = "A1";
+			game.shoot(coordinate);
+
+			string output = oss.str();
+
+			std::cout.rdbuf(p_cout_streambuf);
+
+			string expected = "Laukaus kohtaan A1 osui laivaan.\n";
+			Assert::AreEqual(output, expected);
+		}
+
+		TEST_METHOD(Gameboard_shoot_sink)
+		{
+			std::stringstream oss;
+			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+			std::cout.rdbuf(oss.rdbuf());
+
+			Gameboard game(7);
+
+			game.addShip(2, "A1", "e");
+			string coordinate = "A1";
+			game.shoot(coordinate);
+			game.shoot("B1");
+
+			string output = oss.str();
+
+			std::cout.rdbuf(p_cout_streambuf);
+
+			string expected = "Laukaus kohtaan A1 osui laivaan.\nLaukaus kohtaan B1 upotti laivan.\n";
+			Assert::AreEqual(output, expected);
 		}
 	};
 }
