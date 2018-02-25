@@ -43,7 +43,6 @@ Gameboard::~Gameboard()
 	delete[] shots_;
 	delete[] ships_;
 
-
 	cout << "Gameboard destructor." << endl;
 }
 
@@ -199,7 +198,7 @@ bool Gameboard::shoot(string coord)
 			{
 				output = MISSED_SHIP;
 				cout << output.insert(16, coord);
-				shots_[y][x] = 'X';
+				shots_[x][y] = 'X';
 				return true;
 			}
 			else
