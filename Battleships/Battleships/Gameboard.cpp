@@ -6,8 +6,9 @@ using std::cin;
 using std::endl;
 
 
-Gameboard::Gameboard(int boardSize) :boardSize_(boardSize), shipsAdded_(0)
+Gameboard::Gameboard(int boardSize, int shipCount) :boardSize_(boardSize), shipCount_(shipCount), shipsAdded_(0)
 {
+	shiplist_ = new Ship[shipCount_];
 
 	shots_ = new char*[boardSize_];
 	ships_ = new int*[boardSize_];
@@ -32,6 +33,7 @@ Gameboard::~Gameboard()
 	}
 	delete[] shots_;
 	delete[] ships_;
+	delete[] shiplist_;
 
 	cout << "Gameboard destructor." << endl;
 }
@@ -64,9 +66,9 @@ void Gameboard::initialize()
 		}
 	}
 	shipsAdded_ = 0;
-	for (int i = 0; i < SHIP_COUNT; i++)
+	for (int i = 0; i < shipCount_; i++)
 	{
-		shiplist[i] = Ship();	
+		shiplist_[i] = Ship();	
 	}
 }
 
@@ -93,7 +95,7 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 				}
 
 			}
-			shiplist[shipsAdded_].setSize(shipSize);
+			shiplist_[shipsAdded_].setSize(shipSize);
 			for (size_t i = 0; i < shipSize; i++)
 			{
 				ships_[x][y-i] = shipsAdded_;
@@ -119,7 +121,7 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 				}
 
 			}
-			shiplist[shipsAdded_].setSize(shipSize);
+			shiplist_[shipsAdded_].setSize(shipSize);
 			for (size_t i = 0; i < shipSize; i++)
 			{
 				ships_[x+i][y] = shipsAdded_;
@@ -144,7 +146,7 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 				}
 
 			}
-			shiplist[shipsAdded_].setSize(shipSize);
+			shiplist_[shipsAdded_].setSize(shipSize);
 			for (size_t i = 0; i < shipSize; i++)
 			{
 				ships_[x][y+i] = shipsAdded_;
@@ -169,7 +171,7 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 				}
 
 			}
-			shiplist[shipsAdded_].setSize(shipSize);
+			shiplist_[shipsAdded_].setSize(shipSize);
 			for (size_t i = 0; i < shipSize; i++)
 			{
 				ships_[x-i][y] = shipsAdded_;
@@ -216,9 +218,9 @@ bool Gameboard::shoot(string coord)
 			{
 				
 				int target = ships_[x][y];
-				shiplist[target].hit();
+				shiplist_[target].hit();
 				//Check if the target that was hit sinks 
-				if (shiplist[target].getHits() == shiplist[target].getSize())
+				if (shiplist_[target].getHits() == shiplist_[target].getSize())
 				{
 					output = SUNK_SHIP;
 					cout << output.insert(16, coord) ;
@@ -301,7 +303,7 @@ void Gameboard::printShips() const
 				//cout << ships_[x][y] << " ";
 
 				//print ship sizes
-				cout << shiplist[ships_[x][y]].getSize() << " ";
+				cout << shiplist_[ships_[x][y]].getSize() << " ";
 			}
 		}
 

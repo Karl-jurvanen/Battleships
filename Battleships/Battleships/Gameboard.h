@@ -3,7 +3,6 @@
 #include <string>
 using std::string;
 
-static const int SHIP_COUNT = 4;
 static const int SHIPS_IN_GAME[] = { 1,1,1,1 };  // number of ships of each size 5, 4, 3, 2
 
 const string SHIP_ALREADY_THERE = "Ship already there.\n";
@@ -19,7 +18,7 @@ enum Direction { North, East, South, West };
 class Gameboard
 {
 public:
-	Gameboard(int boardSize);
+	Gameboard(int boardSize, int shipCount);
 	~Gameboard();
 
 	char ** getShots() const;
@@ -37,8 +36,9 @@ public:
 private:
 
 	//list of all ships that have been added to the gameboard
-	Ship shiplist[SHIP_COUNT];
+	Ship * shiplist_;
 
+	int shipCount_;
 	int shipsAdded_;
 	int boardSize_;
 	char **shots_;

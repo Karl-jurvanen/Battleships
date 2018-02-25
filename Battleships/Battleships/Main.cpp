@@ -10,14 +10,14 @@ using std::getline;
 
 void test(int board)
 {
-	Gameboard game1(board);
+	Gameboard game1(board,4);
 	game1.printShots();
 	game1.printShips();
 }
 
 int main()
 {
-	Gameboard game2(9);
+	Gameboard game2(9,4);
 
 	game2.printShips();
 	game2.addShip(5, "G6", "p");
