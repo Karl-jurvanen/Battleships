@@ -19,7 +19,7 @@ namespace TestProject
 			
 			for (int i = 5; i < 13; i++)
 			{
-				Gameboard testgame1(i);
+				Gameboard testgame1(i,4);
 
 				Assert::AreEqual(i, testgame1.getBoardSize());
 				
@@ -33,7 +33,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,4);
 
 			game.addShip(5,"a1","e");
 			game.initialize();
@@ -78,7 +78,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(6);
+			Gameboard game(6,4);
 
 			game.printShips();
 
@@ -108,7 +108,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,4);
 
 			game.printShips();
 
@@ -138,7 +138,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(8);
+			Gameboard game(8,4);
 
 			game.printShips();
 
@@ -169,7 +169,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(9);
+			Gameboard game(9,4);
 
 			game.printShips();
 
@@ -201,7 +201,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(6);
+			Gameboard game(6,4);
 
 			game.addShip(5,  "A1", "e");
 			game.printShips();
@@ -231,7 +231,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,4);
 
 			game.addShip(5, "A1","e");
 			game.printShips();
@@ -262,7 +262,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(8);
+			Gameboard game(8,4);
 
 			game.addShip(5,  "A1", "e");
 			game.printShips();
@@ -294,7 +294,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(9);
+			Gameboard game(9,4);
 
 			game.addShip(5, "A1", "e");
 			game.printShips();
@@ -330,7 +330,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(6);
+			Gameboard game(6,4);
 
 			game.addShip(5, "A1", "e");
 			game.addShip(5, "A1", "e");
@@ -351,7 +351,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,4);
 
 			game.addShip(5, "A6", "e");
 			game.addShip(5, "C6", "e");
@@ -372,7 +372,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(6);
+			Gameboard game(6,4);
 
 			game.addShip(5, "A6", "p");
 			
@@ -393,7 +393,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,4);
 
 			game.addShip(5, "G7", "i");
 
@@ -414,7 +414,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,4);
 
 			game.addShip(5, "H7", "i");
 
@@ -449,7 +449,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,4);
 
 			game.addShip(5, "A1", "e");
 			string coordinate = "B2";
@@ -470,7 +470,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,4);
 
 			game.addShip(5, "A1", "e");
 			string coordinate = "A1";
@@ -490,7 +490,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,4);
 
 			game.addShip(2, "A1", "e");
 			string coordinate = "A1";
