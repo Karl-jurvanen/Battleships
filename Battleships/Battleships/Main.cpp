@@ -13,7 +13,25 @@ using std::getline;
 
 int main()
 {
-	Game testgame;
+	string input;
+
+	cout << "Anna kentan sivu";
+	getline(cin, input);
+	int size;
+	try
+	{
+		size = stoi(input);
+
+	}
+	catch (const std::invalid_argument&)
+	{
+		//catch possible exception from converting the string to int
+		cout << "Virheellinen syote." << endl;
+		return false;
+	}
+	int laivat[4] = { 2,0,1,3 };
+	Game testgame(size, laivat, 4 , 6);
+	//Game testgame;
 	testgame.menu();
 
 	//Gameboard game2(9,4);
@@ -32,8 +50,6 @@ int main()
 	//while (true)
 	//{
 	//	string input;
-	//	cout << "Anna ampumakoordinaatit: ";
-	//	getline(cin, input);
 	//
 	//	if (input == "\\@")
 	//	{
