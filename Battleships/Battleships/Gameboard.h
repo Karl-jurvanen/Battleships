@@ -5,22 +5,22 @@ using std::string;
 
 static const int SHIPS_IN_GAME[] = { 1,1,1,1 };  // number of ships of each size 5, 4, 3, 2
 
-const string SHIP_ALREADY_THERE = "Ship already there.\n";
-const string SHIP_OUT_OF_BOUNDS = "Ship goes off game board.\n";
-const string BAD_COORDINATE = "Virheellinen koordinaatti.\n";
+const string SHIP_ALREADY_THERE = "Ship already there.\n\n";
+const string SHIP_OUT_OF_BOUNDS = "Ship goes off game board.\n\n";
+const string BAD_COORDINATE = "Virheellinen koordinaatti.\n\n";
 const string BAD_INPUT = "Virheellinen syote\n";
-const string ALREADY_SHOT_THERE = "Kohtaan  on jo ammuttu.\n";
-const string MISSED_SHIP = "Laukaus kohtaan  ei osunut.\n";
-const string HIT_SHIP = "Laukaus kohtaan  osui laivaan.\n";
-const string SUNK_SHIP = "Laukaus kohtaan  upotti laivan.\n";
+const string ALREADY_SHOT_THERE = "Kohtaan  on jo ammuttu.\n\n";
+const string MISSED_SHIP = "\nLaukaus kohtaan  ei osunut.\\nn";
+const string HIT_SHIP = "\nLaukaus kohtaan  osui laivaan.\n\n";
+const string SUNK_SHIP = "\nLaukaus kohtaan  upotti laivan.\n\n";
 
 enum Direction { North, East, South, West };
 
 class Gameboard
 {
 public:
-	Gameboard(int boardSize, int shipCount);
 	Gameboard();
+	Gameboard(int boardSize, int shipCount);
 	~Gameboard();
 
 	char ** getShots() const;

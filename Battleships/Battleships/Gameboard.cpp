@@ -238,14 +238,14 @@ bool Gameboard::shoot(string coord)
 				if (shiplist_[target].getHits() == shiplist_[target].getSize())
 				{
 					output = SUNK_SHIP;
-					cout << output.insert(16, coord) ;
+					cout << output.insert(17, coord) ;
 					sinkShip(target);
 				}
 				else
 					//Ship was hit but it did not sink
 				{
 					output = HIT_SHIP;
-					cout << output.insert(16, coord);
+					cout << output.insert(17, coord);
 					shots_[x][y] = '*';
 				}
 				return true;
@@ -275,7 +275,7 @@ void Gameboard::sinkShip(int shipIndes)
 
 void Gameboard::printShots() const
 {
-
+	cout << "Pelitilanne on seuraava:\n\n";
 	printHeader();
 
 	char column = 'A';
@@ -299,6 +299,7 @@ void Gameboard::printShots() const
 
 void Gameboard::printShips() const
 {
+	cout << "Laivat sijaitsevat seuraavissa paikoissa:\n\n";
 	printHeader();
 
 	char column = 'A';
