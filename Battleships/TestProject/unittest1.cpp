@@ -19,7 +19,7 @@ namespace TestProject
 			
 			for (int i = 5; i < 13; i++)
 			{
-				Gameboard testgame1(i);
+				Gameboard testgame1(i,4);
 
 				Assert::AreEqual(i, testgame1.getBoardSize());
 				
@@ -33,7 +33,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,1);
 
 			game.addShip(5,"a1","e");
 			game.initialize();
@@ -44,6 +44,7 @@ namespace TestProject
 			std::cout.rdbuf(p_cout_streambuf);
 
 			string expected =
+				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 7 \n"
 				"  ------------------\n"
 				"A |                | A\n"
@@ -78,7 +79,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(6);
+			Gameboard game(6,1);
 
 			game.printShips();
 
@@ -87,6 +88,7 @@ namespace TestProject
 			std::cout.rdbuf(p_cout_streambuf);
 
 			string expected =
+				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 \n"
 				"  ----------------\n"
 				"A |              | A\n"
@@ -108,7 +110,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,1);
 
 			game.printShips();
 
@@ -117,6 +119,7 @@ namespace TestProject
 			std::cout.rdbuf(p_cout_streambuf);
 
 			string expected =
+				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 7 \n"
 				"  ------------------\n"
 				"A |                | A\n"
@@ -138,7 +141,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(8);
+			Gameboard game(8,1);
 
 			game.printShips();
 
@@ -147,6 +150,7 @@ namespace TestProject
 			std::cout.rdbuf(p_cout_streambuf);
 
 			string expected =
+				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 7 8 \n"
 				"  --------------------\n"
 				"A |                  | A\n"
@@ -169,7 +173,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(9);
+			Gameboard game(9,1);
 
 			game.printShips();
 
@@ -178,6 +182,7 @@ namespace TestProject
 			std::cout.rdbuf(p_cout_streambuf);
 
 			string expected =
+				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 7 8 9 \n"
 				"  ----------------------\n"
 				"A |                    | A\n"
@@ -201,7 +206,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(6);
+			Gameboard game(6,1);
 
 			game.addShip(5,  "A1", "e");
 			game.printShips();
@@ -211,6 +216,7 @@ namespace TestProject
 			std::cout.rdbuf(p_cout_streambuf);
 
 			string expected =
+				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 \n"
 				"  ----------------\n"
 				"A | 5            | A\n"
@@ -231,7 +237,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,1);
 
 			game.addShip(5, "A1","e");
 			game.printShips();
@@ -241,6 +247,7 @@ namespace TestProject
 			std::cout.rdbuf(p_cout_streambuf);
 
 			string expected = 
+				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 7 \n"
 				"  ------------------\n"
 				"A | 5              | A\n"
@@ -262,7 +269,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(8);
+			Gameboard game(8,1);
 
 			game.addShip(5,  "A1", "e");
 			game.printShips();
@@ -272,6 +279,7 @@ namespace TestProject
 			std::cout.rdbuf(p_cout_streambuf);
 
 			string expected =
+				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 7 8 \n"
 				"  --------------------\n"
 				"A | 5                | A\n"
@@ -294,7 +302,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(9);
+			Gameboard game(9,1);
 
 			game.addShip(5, "A1", "e");
 			game.printShips();
@@ -304,6 +312,7 @@ namespace TestProject
 			std::cout.rdbuf(p_cout_streambuf);
 
 			string expected =
+				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 7 8 9 \n"
 				"  ----------------------\n"
 				"A | 5                  | A\n"
@@ -330,7 +339,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(6);
+			Gameboard game(6,2);
 
 			game.addShip(5, "A1", "e");
 			game.addShip(5, "A1", "e");
@@ -351,7 +360,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,2);
 
 			game.addShip(5, "A6", "e");
 			game.addShip(5, "C6", "e");
@@ -372,7 +381,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(6);
+			Gameboard game(6,2);
 
 			game.addShip(5, "A6", "p");
 			
@@ -393,7 +402,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,2);
 
 			game.addShip(5, "G7", "i");
 
@@ -403,7 +412,7 @@ namespace TestProject
 			//Logger::WriteMessage(output);
 			std::cout.rdbuf(p_cout_streambuf);
 
-			string expected = "Ship goes off game board.\n";
+			string expected = "Ship goes off game board.\n\n";
 
 			Assert::AreEqual(output, expected);
 		}
@@ -414,14 +423,14 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,2);
 
 			game.addShip(5, "H7", "i");
 
 			string output = oss.str();
 			std::cout.rdbuf(p_cout_streambuf);
 
-			string expected = "Virheellinen koordinaatti.\n";
+			string expected = "Virheellinen koordinaatti.\n\n";
 
 			Assert::AreEqual(output, expected);
 		}
@@ -449,7 +458,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,2);
 
 			game.addShip(5, "A1", "e");
 			string coordinate = "B2";
@@ -470,7 +479,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,1);
 
 			game.addShip(5, "A1", "e");
 			string coordinate = "A1";
@@ -480,7 +489,7 @@ namespace TestProject
 
 			std::cout.rdbuf(p_cout_streambuf);
 
-			string expected = "Laukaus kohtaan A1 osui laivaan.\n";
+			string expected = "\nLaukaus kohtaan A1 osui laivaan.\n\n";
 			Assert::AreEqual(output, expected);
 		}
 
@@ -490,7 +499,7 @@ namespace TestProject
 			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 			std::cout.rdbuf(oss.rdbuf());
 
-			Gameboard game(7);
+			Gameboard game(7,1);
 
 			game.addShip(2, "A1", "e");
 			string coordinate = "A1";
@@ -501,7 +510,8 @@ namespace TestProject
 
 			std::cout.rdbuf(p_cout_streambuf);
 
-			string expected = "Laukaus kohtaan A1 osui laivaan.\nLaukaus kohtaan B1 upotti laivan.\n";
+			string expected =	"\nLaukaus kohtaan A1 osui laivaan.\n\n"
+								"\nLaukaus kohtaan B1 upotti laivan.\n\n";
 			Assert::AreEqual(output, expected);
 		}
 	};
