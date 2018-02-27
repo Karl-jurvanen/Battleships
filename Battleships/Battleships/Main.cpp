@@ -29,8 +29,8 @@ int main()
 		cout << "Virheellinen syote." << endl;
 		return false;
 	}
-	int laivat[4] = { 1,0,0,0 };
-	Game testgame(size, laivat, 4 , 1);
+	int laivat[4] = { 1,1,0,0 };
+	Game testgame(size, laivat, 4 , 2);
 	//Game testgame;
 	testgame.menu();
 

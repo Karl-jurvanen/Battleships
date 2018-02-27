@@ -70,9 +70,10 @@ void Game::addShips()
 				cout << ADD_SHIP_DIR;
 				getline(cin, direction);
 				if (board_.addShip(sizeToAdd, coordinate, direction))
+				{
 					board_.printShips();
 					break;
-				
+				}
 			}		
 		}
 	}
@@ -83,6 +84,7 @@ void Game::shoot()
 {
 	while (true)
 	{
+		board_.printShots();
 		string input;
 		cout << SHOOT_COORD;
 		getline(cin, input);
@@ -101,7 +103,7 @@ void Game::shoot()
 			continue;
 		}
 		board_.shoot(input);
-		board_.printShots();
+		
 
 		if (board_.checkGameOver())
 		{
