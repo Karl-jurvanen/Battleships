@@ -115,12 +115,13 @@ void Game::addShipsRandom()
 
 				if (board_.addShipQuiet(sizeToAdd, x, y, direction))
 				{
-					//board_.printShips();
+					
 					break;
 				}
 			}
 		}
 	}
+	board_.printShips();
 	gameOver_ = 0;
 }
 
