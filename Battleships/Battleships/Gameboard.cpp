@@ -330,7 +330,7 @@ bool Gameboard::shoot(string coord)
 			if (ships_[x][y] == -1)
 			{
 				output = MISSED_SHIP;
-				cout << output.insert(16, coord);
+				cout << output.insert(17, coord);
 				shots_[x][y] = 'X';
 				return true;
 			}
@@ -394,7 +394,7 @@ void Gameboard::printShots() const
 			cout << shots_[i][j] << " ";
 		}
 
-		cout << " | " << column << endl;
+		cout << "| " << column << endl;
 		column++;	//incrementing a char type moves the character to next in the alphabet
 	}
 
@@ -429,7 +429,7 @@ void Gameboard::printShips() const
 			}
 		}
 
-		cout << " | " << column << endl;
+		cout << "| " << column << endl;
 		column++;
 	}
 
@@ -460,7 +460,7 @@ void Gameboard::printHeader() const
 
 	cout << endl << "  ";
 
-	for (int i = 0; i < boardSize_ * 2 + 4; i++)
+	for (int i = 0; i < boardSize_ * 2 + 3; i++)
 	{
 		cout << "-";
 	}
@@ -471,7 +471,7 @@ void Gameboard::printHeader() const
 void Gameboard::printFooter() const
 {
 	cout << "  ";
-	for (int i = 0; i < boardSize_ * 2 + 4; i++)
+	for (int i = 0; i < boardSize_ * 2 + 3; i++)
 	{
 		cout << "-";
 	}

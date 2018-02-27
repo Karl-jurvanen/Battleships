@@ -10,7 +10,7 @@ const string SHIP_OUT_OF_BOUNDS = "Ship goes off game board.\n\n";
 const string BAD_COORDINATE = "Virheellinen koordinaatti.\n\n";
 const string BAD_INPUT = "Virheellinen syote\n";
 const string ALREADY_SHOT_THERE = "Kohtaan  on jo ammuttu.\n\n";
-const string MISSED_SHIP = "\nLaukaus kohtaan  ei osunut.\\nn";
+const string MISSED_SHIP = "\nLaukaus kohtaan  ei osunut.\n\n";
 const string HIT_SHIP = "\nLaukaus kohtaan  osui laivaan.\n\n";
 const string SUNK_SHIP = "\nLaukaus kohtaan  upotti laivan.\n\n";
 
