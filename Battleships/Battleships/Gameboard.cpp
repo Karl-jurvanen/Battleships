@@ -23,6 +23,21 @@ Gameboard::Gameboard(int boardSize, int shipCount) :boardSize_(boardSize), shipC
 	initialize();
 }
 
+Gameboard::Gameboard():boardSize_(7), shipCount_(4), shipsAdded_(0)
+{
+	shiplist_ = new Ship[shipCount_];
+
+	shots_ = new char*[boardSize_];
+	ships_ = new int*[boardSize_];
+
+	for (int i = 0; i < boardSize_; i++)
+	{
+		shots_[i] = new char[boardSize_];
+		ships_[i] = new int[boardSize_];
+	}
+	initialize();
+}
+
 
 Gameboard::~Gameboard()
 {
@@ -356,6 +371,7 @@ bool Gameboard::parseCoordinates(int& x, int& y, string input) const
 
 	if (input.length() < 2 || input.length() > 3)
 	{
+		cout << BAD_INPUT;
 		return false;
 	}
 	//First character of input corresponds to y coordinate and 
@@ -370,7 +386,7 @@ bool Gameboard::parseCoordinates(int& x, int& y, string input) const
 	catch (const std::invalid_argument&)
 	{
 		//catch possible exception from converting the string to int
-		cout << "Virheellinen syote." << endl;
+		cout << BAD_INPUT;
 		return false;
 	}
 

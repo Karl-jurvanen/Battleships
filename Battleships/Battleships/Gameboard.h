@@ -8,6 +8,7 @@ static const int SHIPS_IN_GAME[] = { 1,1,1,1 };  // number of ships of each size
 const string SHIP_ALREADY_THERE = "Ship already there.\n";
 const string SHIP_OUT_OF_BOUNDS = "Ship goes off game board.\n";
 const string BAD_COORDINATE = "Virheellinen koordinaatti.\n";
+const string BAD_INPUT = "Virheellinen syote\n";
 const string ALREADY_SHOT_THERE = "Kohtaan  on jo ammuttu.\n";
 const string MISSED_SHIP = "Laukaus kohtaan  ei osunut.\n";
 const string HIT_SHIP = "Laukaus kohtaan  osui laivaan.\n";
@@ -19,6 +20,7 @@ class Gameboard
 {
 public:
 	Gameboard(int boardSize, int shipCount);
+	Gameboard();
 	~Gameboard();
 
 	char ** getShots() const;
