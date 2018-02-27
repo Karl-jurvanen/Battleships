@@ -16,6 +16,7 @@ public:
 	~Game();
 	
 	void addShips();
+	void addShipsRandom();
 	void shoot();
 	void menu();
 

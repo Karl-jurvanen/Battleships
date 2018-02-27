@@ -29,6 +29,8 @@ public:
 
 	void initialize();
 	bool addShip(size_t shipSize,  string coord, string dir);
+	bool addShip(size_t shipSize, int x, int y, string dir);
+	bool addShipQuiet(size_t shipSize, int x, int y, string dir);
 	bool shoot(string coord);
 	void sinkShip(int shipIndes);
 	void printShots() const;

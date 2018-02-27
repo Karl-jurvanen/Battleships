@@ -1,6 +1,8 @@
 #include "Game.h"
 #include <string>
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 
 using std::cout;
 using std::cin;
@@ -80,6 +82,48 @@ void Game::addShips()
 	gameOver_ = 0;
 }
 
+void Game::addShipsRandom()
+{
+	srand(time(NULL));
+	for (int i = 0; i < shipSizes_; i++)
+	{
+		for (int j = 0; j < shipList_[i]; j++)
+		{
+			while (true)
+			{
+				int sizeToAdd = shipSizes_ + 1 - i;
+				int x;
+				int y;
+				int dir;
+				string direction;
+
+				x = rand() % (board_.getBoardSize() -1);
+				y = rand() % (board_.getBoardSize() -1);
+				dir = rand() % 3;
+
+				switch (dir)
+				{
+				case 0: direction = "p";
+					break;
+				case 1: direction = "i";
+					break;
+				case 2: direction = "e";
+					break;
+				case 3: direction = "l";
+					break;
+				}
+
+				if (board_.addShipQuiet(sizeToAdd, x, y, direction))
+				{
+					//board_.printShips();
+					break;
+				}
+			}
+		}
+	}
+	gameOver_ = 0;
+}
+
 void Game::shoot()
 {
 	while (true)
@@ -154,7 +198,8 @@ void Game::menu()
 
 		else if (userChoise == "3")
 		{
-			cout << "valittiin Sijaintien arpominen." << endl;
+			board_.initialize();
+			addShipsRandom();
 		}
 		else if (userChoise == "L" || userChoise == "l")
 		{

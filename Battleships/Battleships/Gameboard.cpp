@@ -93,114 +93,219 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 	int y;
 	if (parseCoordinates(x, y, coord))
 	{
-		
-		if (dir == "p")
-		{
-			for (size_t i = 0; i < shipSize; i++)
-			{
-				if (!checkCoordinate(x, (y - i)))
-				{
-					cout << SHIP_OUT_OF_BOUNDS ;
-					return false;
-				}
-				if (ships_[x][y-i] != -1)
-				{
-					cout << SHIP_ALREADY_THERE ;
-					return false;
-				}
-
-			}
-			shiplist_[shipsAdded_].setSize(shipSize);
-			for (size_t i = 0; i < shipSize; i++)
-			{
-				ships_[x][y-i] = shipsAdded_;
-			}
-			shipsAdded_++;
-			return true;
-
-		}
-
-		else if (dir == "i")
-		{
-			for (size_t i = 0; i < shipSize; i++)
-			{
-				if (!checkCoordinate((x + i), y))
-				{
-					cout << SHIP_OUT_OF_BOUNDS ;
-					return false;
-				}
-				if (ships_[x+i][y] != -1)
-				{
-					cout << SHIP_ALREADY_THERE;
-					return false;
-				}
-
-			}
-			shiplist_[shipsAdded_].setSize(shipSize);
-			for (size_t i = 0; i < shipSize; i++)
-			{
-				ships_[x+i][y] = shipsAdded_;
-			}
-			shipsAdded_++;
-			return true;
-		}
-
-		else if (dir == "e")
-		{
-			for (size_t i = 0; i < shipSize; i++)
-			{
-				if (!checkCoordinate(x, (y + i)))
-				{
-					cout << SHIP_OUT_OF_BOUNDS ;
-					return false;
-				}
-				if (ships_[x][y+i] != -1)
-				{
-					cout << SHIP_ALREADY_THERE ;
-					return false;
-				}
-
-			}
-			shiplist_[shipsAdded_].setSize(shipSize);
-			for (size_t i = 0; i < shipSize; i++)
-			{
-				ships_[x][y+i] = shipsAdded_;
-			}
-			shipsAdded_++;
-			return true;
-		}
-
-		else if (dir == "l")
-		{
-			for (size_t i = 0; i < shipSize; i++)
-			{
-				if (!checkCoordinate((x - i), y))
-				{
-					cout << SHIP_OUT_OF_BOUNDS << endl;
-					return false;
-				}
-				if (ships_[x-i][y] != -1)
-				{
-					cout << SHIP_ALREADY_THERE << endl;
-					return false;
-				}
-
-			}
-			shiplist_[shipsAdded_].setSize(shipSize);
-			for (size_t i = 0; i < shipSize; i++)
-			{
-				ships_[x-i][y] = shipsAdded_;
-			}
-			shipsAdded_++;
-			return true;
-		}
-		else
-		{
-			cout << "Virheellinen suunta." << endl;
-			return false;
-		}
+		return addShip(shipSize, x, y, dir);
 	}
 	return false;
+}
+
+bool Gameboard::addShip(size_t shipSize, int x, int y, string dir)
+{
+	if (dir == "p")
+	{
+		for (size_t i = 0; i < shipSize; i++)
+		{
+			if (!checkCoordinate(x, (y - i)))
+			{
+				cout << SHIP_OUT_OF_BOUNDS;
+				return false;
+			}
+			if (ships_[x][y - i] != -1)
+			{
+				cout << SHIP_ALREADY_THERE;
+				return false;
+			}
+
+		}
+		shiplist_[shipsAdded_].setSize(shipSize);
+		for (size_t i = 0; i < shipSize; i++)
+		{
+			ships_[x][y - i] = shipsAdded_;
+		}
+		shipsAdded_++;
+		return true;
+
+	}
+
+	else if (dir == "i")
+	{
+		for (size_t i = 0; i < shipSize; i++)
+		{
+			if (!checkCoordinate((x + i), y))
+			{
+				cout << SHIP_OUT_OF_BOUNDS;
+				return false;
+			}
+			if (ships_[x + i][y] != -1)
+			{
+				cout << SHIP_ALREADY_THERE;
+				return false;
+			}
+
+		}
+		shiplist_[shipsAdded_].setSize(shipSize);
+		for (size_t i = 0; i < shipSize; i++)
+		{
+			ships_[x + i][y] = shipsAdded_;
+		}
+		shipsAdded_++;
+		return true;
+	}
+
+	else if (dir == "e")
+	{
+		for (size_t i = 0; i < shipSize; i++)
+		{
+			if (!checkCoordinate(x, (y + i)))
+			{
+				cout << SHIP_OUT_OF_BOUNDS;
+				return false;
+			}
+			if (ships_[x][y + i] != -1)
+			{
+				cout << SHIP_ALREADY_THERE;
+				return false;
+			}
+
+		}
+		shiplist_[shipsAdded_].setSize(shipSize);
+		for (size_t i = 0; i < shipSize; i++)
+		{
+			ships_[x][y + i] = shipsAdded_;
+		}
+		shipsAdded_++;
+		return true;
+	}
+
+	else if (dir == "l")
+	{
+		for (size_t i = 0; i < shipSize; i++)
+		{
+			if (!checkCoordinate((x - i), y))
+			{
+				cout << SHIP_OUT_OF_BOUNDS;
+				return false;
+			}
+			if (ships_[x - i][y] != -1)
+			{
+				cout << SHIP_ALREADY_THERE;
+				return false;
+			}
+
+		}
+		shiplist_[shipsAdded_].setSize(shipSize);
+		for (size_t i = 0; i < shipSize; i++)
+		{
+			ships_[x - i][y] = shipsAdded_;
+		}
+		shipsAdded_++;
+		return true;
+	}
+	else
+	{
+		cout << "Virheellinen suunta." << endl;
+		return false;
+	}
+}
+
+bool Gameboard::addShipQuiet(size_t shipSize, int x, int y, string dir)
+{
+	if (dir == "p")
+	{
+		for (size_t i = 0; i < shipSize; i++)
+		{
+			if (!checkCoordinate(x, (y - i)))
+			{
+				return false;
+			}
+			if (ships_[x][y - i] != -1)
+			{
+				return false;
+			}
+
+		}
+		shiplist_[shipsAdded_].setSize(shipSize);
+		for (size_t i = 0; i < shipSize; i++)
+		{
+			ships_[x][y - i] = shipsAdded_;
+		}
+		shipsAdded_++;
+		return true;
+
+	}
+
+	else if (dir == "i")
+	{
+		for (size_t i = 0; i < shipSize; i++)
+		{
+			if (!checkCoordinate((x + i), y))
+			{
+				return false;
+			}
+			if (ships_[x + i][y] != -1)
+			{
+				return false;
+			}
+
+		}
+		shiplist_[shipsAdded_].setSize(shipSize);
+		for (size_t i = 0; i < shipSize; i++)
+		{
+			ships_[x + i][y] = shipsAdded_;
+		}
+		shipsAdded_++;
+		return true;
+	}
+
+	else if (dir == "e")
+	{
+		for (size_t i = 0; i < shipSize; i++)
+		{
+			if (!checkCoordinate(x, (y + i)))
+			{
+				return false;
+			}
+			if (ships_[x][y + i] != -1)
+			{
+				return false;
+			}
+
+		}
+		shiplist_[shipsAdded_].setSize(shipSize);
+		for (size_t i = 0; i < shipSize; i++)
+		{
+			ships_[x][y + i] = shipsAdded_;
+		}
+		shipsAdded_++;
+		return true;
+	}
+
+	else if (dir == "l")
+	{
+		for (size_t i = 0; i < shipSize; i++)
+		{
+			if (!checkCoordinate((x - i), y))
+			{
+				return false;
+			}
+			if (ships_[x - i][y] != -1)
+			{
+				return false;
+			}
+
+		}
+		shiplist_[shipsAdded_].setSize(shipSize);
+		for (size_t i = 0; i < shipSize; i++)
+		{
+			ships_[x - i][y] = shipsAdded_;
+		}
+		shipsAdded_++;
+		return true;
+	}
+	else
+	{
+		cout << "Virheellinen suunta." << endl;
+		return false;
+	}
 }
 
 //Shoot function retuens true if shooting is succesfull (hit or miss)
