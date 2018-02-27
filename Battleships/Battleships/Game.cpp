@@ -102,6 +102,13 @@ void Game::shoot()
 		}
 		board_.shoot(input);
 		board_.printShots();
+
+		if (board_.checkGameOver())
+		{
+			cout << "Peli loppui.\n";
+			gameOver_ = 1;
+			break;
+		}
 	}
 }
 

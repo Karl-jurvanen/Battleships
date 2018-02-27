@@ -34,6 +34,7 @@ public:
 	void printShots() const;
 	void printShips() const;
 	
+	bool checkGameOver()const;
 	
 private:
 
@@ -41,6 +42,7 @@ private:
 	Ship * shiplist_;
 
 	int shipCount_;
+	int shipsSunk_;
 	int shipsAdded_;
 	int boardSize_;
 	char **shots_;

@@ -6,7 +6,7 @@ using std::cin;
 using std::endl;
 
 
-Gameboard::Gameboard(int boardSize, int shipCount) :boardSize_(boardSize), shipCount_(shipCount), shipsAdded_(0)
+Gameboard::Gameboard(int boardSize, int shipCount) :boardSize_(boardSize), shipCount_(shipCount), shipsAdded_(0), shipsSunk_(0)
 {
 	shiplist_ = new Ship[shipCount_];
 
@@ -23,7 +23,7 @@ Gameboard::Gameboard(int boardSize, int shipCount) :boardSize_(boardSize), shipC
 	initialize();
 }
 
-Gameboard::Gameboard():boardSize_(7), shipCount_(4), shipsAdded_(0)
+Gameboard::Gameboard():boardSize_(7), shipCount_(4), shipsAdded_(0), shipsSunk_(0)
 {
 	shiplist_ = new Ship[shipCount_];
 
@@ -269,6 +269,7 @@ void Gameboard::sinkShip(int shipIndes)
 			}
 		}
 	}
+	shipsSunk_++;
 
 }
 
@@ -327,6 +328,19 @@ void Gameboard::printShips() const
 	}
 
 	printFooter();
+}
+
+bool Gameboard::checkGameOver() const
+{
+	if (shipsSunk_ == shipCount_)
+	{
+		//all ships have been sunk, end game
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 //Function that prints the top rows of gameboard
