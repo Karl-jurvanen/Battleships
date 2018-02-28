@@ -46,15 +46,15 @@ namespace TestProject
 			string expected =
 				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 7 \n"
-				"  ------------------\n"
-				"A |                | A\n"
-				"B |                | B\n"
-				"C |                | C\n"
-				"D |                | D\n"
-				"E |                | E\n"
-				"F |                | F\n"
-				"G |                | G\n"
-				"  ------------------\n"
+				"  -----------------\n"
+				"A |               | A\n"
+				"B |               | B\n"
+				"C |               | C\n"
+				"D |               | D\n"
+				"E |               | E\n"
+				"F |               | F\n"
+				"G |               | G\n"
+				"  -----------------\n"
 				"    1 2 3 4 5 6 7 \n";
 
 			Assert::AreEqual(output, expected);
@@ -90,14 +90,14 @@ namespace TestProject
 			string expected =
 				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 \n"
-				"  ----------------\n"
-				"A |              | A\n"
-				"B |              | B\n"
-				"C |              | C\n"
-				"D |              | D\n"
-				"E |              | E\n"
-				"F |              | F\n"
-				"  ----------------\n"
+				"  ---------------\n"
+				"A |             | A\n"
+				"B |             | B\n"
+				"C |             | C\n"
+				"D |             | D\n"
+				"E |             | E\n"
+				"F |             | F\n"
+				"  ---------------\n"
 				"    1 2 3 4 5 6 \n";
 
 
@@ -121,15 +121,15 @@ namespace TestProject
 			string expected =
 				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 7 \n"
-				"  ------------------\n"
-				"A |                | A\n"
-				"B |                | B\n"
-				"C |                | C\n"
-				"D |                | D\n"
-				"E |                | E\n"
-				"F |                | F\n"
-				"G |                | G\n"
-				"  ------------------\n"
+				"  -----------------\n"
+				"A |               | A\n"
+				"B |               | B\n"
+				"C |               | C\n"
+				"D |               | D\n"
+				"E |               | E\n"
+				"F |               | F\n"
+				"G |               | G\n"
+				"  -----------------\n"
 				"    1 2 3 4 5 6 7 \n";
 
 			Assert::AreEqual(output, expected);
@@ -152,16 +152,16 @@ namespace TestProject
 			string expected =
 				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 7 8 \n"
-				"  --------------------\n"
-				"A |                  | A\n"
-				"B |                  | B\n"
-				"C |                  | C\n"
-				"D |                  | D\n"
-				"E |                  | E\n"
-				"F |                  | F\n"
-				"G |                  | G\n"
-				"H |                  | H\n"
-				"  --------------------\n"
+				"  -------------------\n"
+				"A |                 | A\n"
+				"B |                 | B\n"
+				"C |                 | C\n"
+				"D |                 | D\n"
+				"E |                 | E\n"
+				"F |                 | F\n"
+				"G |                 | G\n"
+				"H |                 | H\n"
+				"  -------------------\n"
 				"    1 2 3 4 5 6 7 8 \n";
 
 			Assert::AreEqual(output, expected);
@@ -184,17 +184,17 @@ namespace TestProject
 			string expected =
 				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 7 8 9 \n"
-				"  ----------------------\n"
-				"A |                    | A\n"
-				"B |                    | B\n"
-				"C |                    | C\n"
-				"D |                    | D\n"
-				"E |                    | E\n"
-				"F |                    | F\n"
-				"G |                    | G\n"
-				"H |                    | H\n"
-				"I |                    | I\n"
-				"  ----------------------\n"
+				"  ---------------------\n"
+				"A |                   | A\n"
+				"B |                   | B\n"
+				"C |                   | C\n"
+				"D |                   | D\n"
+				"E |                   | E\n"
+				"F |                   | F\n"
+				"G |                   | G\n"
+				"H |                   | H\n"
+				"I |                   | I\n"
+				"  ---------------------\n"
 				"    1 2 3 4 5 6 7 8 9 \n";
 
 			Assert::AreEqual(output, expected);
@@ -218,14 +218,14 @@ namespace TestProject
 			string expected =
 				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 \n"
-				"  ----------------\n"
-				"A | 5            | A\n"
-				"B | 5            | B\n"
-				"C | 5            | C\n"
-				"D | 5            | D\n"
-				"E | 5            | E\n"
-				"F |              | F\n"
-				"  ----------------\n"
+				"  ---------------\n"
+				"A | 5           | A\n"
+				"B | 5           | B\n"
+				"C | 5           | C\n"
+				"D | 5           | D\n"
+				"E | 5           | E\n"
+				"F |             | F\n"
+				"  ---------------\n"
 				"    1 2 3 4 5 6 \n";
 
 			Assert::AreEqual(output, expected);
@@ -249,15 +249,15 @@ namespace TestProject
 			string expected = 
 				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 7 \n"
-				"  ------------------\n"
-				"A | 5              | A\n"
-				"B | 5              | B\n"
-				"C | 5              | C\n"
-				"D | 5              | D\n"
-				"E | 5              | E\n"
-				"F |                | F\n"
-				"G |                | G\n"
-				"  ------------------\n"
+				"  -----------------\n"
+				"A | 5             | A\n"
+				"B | 5             | B\n"
+				"C | 5             | C\n"
+				"D | 5             | D\n"
+				"E | 5             | E\n"
+				"F |               | F\n"
+				"G |               | G\n"
+				"  -----------------\n"
 				"    1 2 3 4 5 6 7 \n";
 
 			Assert::AreEqual(output, expected);
@@ -281,16 +281,16 @@ namespace TestProject
 			string expected =
 				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 7 8 \n"
-				"  --------------------\n"
-				"A | 5                | A\n"
-				"B | 5                | B\n"
-				"C | 5                | C\n"
-				"D | 5                | D\n"
-				"E | 5                | E\n"
-				"F |                  | F\n"
-				"G |                  | G\n"
-				"H |                  | H\n"
-				"  --------------------\n"
+				"  -------------------\n"
+				"A | 5               | A\n"
+				"B | 5               | B\n"
+				"C | 5               | C\n"
+				"D | 5               | D\n"
+				"E | 5               | E\n"
+				"F |                 | F\n"
+				"G |                 | G\n"
+				"H |                 | H\n"
+				"  -------------------\n"
 				"    1 2 3 4 5 6 7 8 \n";
 
 			Assert::AreEqual(output, expected);
@@ -314,17 +314,17 @@ namespace TestProject
 			string expected =
 				"Laivat sijaitsevat seuraavissa paikoissa:\n\n"
 				"    1 2 3 4 5 6 7 8 9 \n"
-				"  ----------------------\n"
-				"A | 5                  | A\n"
-				"B | 5                  | B\n"
-				"C | 5                  | C\n"
-				"D | 5                  | D\n"
-				"E | 5                  | E\n"
-				"F |                    | F\n"
-				"G |                    | G\n"
-				"H |                    | H\n"
-				"I |                    | I\n"
-				"  ----------------------\n"
+				"  ---------------------\n"
+				"A | 5                 | A\n"
+				"B | 5                 | B\n"
+				"C | 5                 | C\n"
+				"D | 5                 | D\n"
+				"E | 5                 | E\n"
+				"F |                   | F\n"
+				"G |                   | G\n"
+				"H |                   | H\n"
+				"I |                   | I\n"
+				"  ---------------------\n"
 				"    1 2 3 4 5 6 7 8 9 \n";
 
 			Assert::AreEqual(output, expected);
@@ -469,7 +469,7 @@ namespace TestProject
 			std::cout.rdbuf(p_cout_streambuf);
 
 			string expected = MISSED_SHIP;
-			expected.insert(16, coordinate);
+			expected.insert(17, coordinate);
 			Assert::AreEqual(output, expected);
 		}
 
