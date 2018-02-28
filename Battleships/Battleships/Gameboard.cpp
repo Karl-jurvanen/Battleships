@@ -481,7 +481,7 @@ void Gameboard::printFooter() const
 	{
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << endl << endl;
 }
 
 bool Gameboard::parseCoordinates(int& x, int& y, string input) const

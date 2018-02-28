@@ -152,7 +152,8 @@ void Game::shoot()
 
 		if (board_.checkGameOver())
 		{
-			cout << "Peli loppui.\n";
+			board_.printShots();
+			cout << "Peli loppui.\n\n";
 			gameOver_ = 1;
 			break;
 		}
