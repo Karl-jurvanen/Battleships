@@ -27,6 +27,9 @@
     <ClInclude Include="..\Battleships\Ship.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Battleships\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -42,6 +45,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="unittest2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Battleships\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="unittest3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

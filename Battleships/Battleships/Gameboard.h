@@ -5,13 +5,14 @@ using std::string;
 
 static const int SHIPS_IN_GAME[] = { 1,1,1,1 };  // number of ships of each size 5, 4, 3, 2
 
-const string SHIP_ALREADY_THERE = "Ship already there.\n";
-const string SHIP_OUT_OF_BOUNDS = "Ship goes off game board.\n";
-const string BAD_COORDINATE = "Virheellinen koordinaatti.\n";
-const string ALREADY_SHOT_THERE = "Kohtaan  on jo ammuttu.\n";
-const string MISSED_SHIP = "Laukaus kohtaan  ei osunut.\n";
-const string HIT_SHIP = "Laukaus kohtaan  osui laivaan.\n";
-const string SUNK_SHIP = "Laukaus kohtaan  upotti laivan.\n";
+const string SHIP_ALREADY_THERE = "Ship already there.\n\n";
+const string SHIP_OUT_OF_BOUNDS = "Ship goes off game board.\n\n";
+const string BAD_COORDINATE = "Virheellinen koordinaatti.\n\n";
+const string BAD_INPUT = "Virheellinen syote\n";
+const string ALREADY_SHOT_THERE = "Kohtaan  on jo ammuttu.\n\n";
+const string MISSED_SHIP = "\nLaukaus kohtaan  ei osunut.\n\n";
+const string HIT_SHIP = "\nLaukaus kohtaan  osui laivaan.\n\n";
+const string SUNK_SHIP = "\nLaukaus kohtaan  upotti laivan.\n\n";
 
 enum Direction { North, East, South, West };
 
@@ -28,11 +29,14 @@ public:
 
 	void initialize();
 	bool addShip(size_t shipSize,  string coord, string dir);
+	bool addShip(size_t shipSize, int x, int y, string dir);
+	bool addShipQuiet(size_t shipSize, int x, int y, string dir);
 	bool shoot(string coord);
 	void sinkShip(int shipIndes);
 	void printShots() const;
 	void printShips() const;
 	
+	bool checkGameOver()const;
 	
 private:
 
@@ -40,6 +44,7 @@ private:
 	Ship * shiplist_;
 
 	int shipCount_;
+	int shipsSunk_;
 	int shipsAdded_;
 	int boardSize_;
 	char **shots_;

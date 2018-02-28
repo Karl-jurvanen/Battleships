@@ -152,12 +152,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Battleships\Game.h" />
     <ClInclude Include="..\Battleships\Gameboard.h" />
     <ClInclude Include="..\Battleships\Ship.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Battleships\Game.cpp" />
     <ClCompile Include="..\Battleships\Gameboard.cpp" />
     <ClCompile Include="..\Battleships\Ship.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -168,6 +170,7 @@
     </ClCompile>
     <ClCompile Include="unittest1.cpp" />
     <ClCompile Include="unittest2.cpp" />
+    <ClCompile Include="unittest3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Battleships\Battleships.vcxproj">

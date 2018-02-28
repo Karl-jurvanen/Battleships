@@ -27,16 +27,12 @@ namespace TestProject
 
 		TEST_METHOD(Ship_Constructor_size)
 		{
-
 			for (int i = 2; i < 6; i++)
 			{
 			Ship ship(i);
 
 			Assert::AreEqual(ship.getSize(), i);
 			}
-			
-
-			
 		}
 
 
