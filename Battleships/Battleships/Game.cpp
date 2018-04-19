@@ -1,7 +1,6 @@
 #include "Game.h"
 #include <string>
 #include <iostream>
-#include <stdlib.h>
 #include <time.h>
 
 using std::cout;
