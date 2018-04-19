@@ -43,6 +43,8 @@ Game::~Game()
 
 void Game::addShips()
 {
+	//step through shipList[] array that contains number of ships of each size that needs to be added to gameboard
+	//for example game with {1,2,3,4} ships  has 1 five-length ship and 4 two-length ships
 	for (int i = 0; i < shipSizes_; i++)
 	{
 		for (int j = 0; j < shipList_[i]; j++)
@@ -66,6 +68,10 @@ void Game::addShips()
 					break;
 				case 5: cout << message.insert(5, "viiden");
 					break;
+				case 6: cout << message.insert(5, "kuuden");
+					break;
+				case 7: cout << message.insert(5, "seitseman");
+					break;
 				default:
 					break;
 				}
@@ -80,11 +86,13 @@ void Game::addShips()
 			}		
 		}
 	}
+	//game can now be started
 	gameOver_ = 0;
 }
 
 void Game::addShipsRandom()
 {
+	//use system time to generate random number
 	srand(time(NULL));
 	for (int i = 0; i < shipSizes_; i++)
 	{
@@ -128,10 +136,16 @@ void Game::addShipsRandom()
 
 void Game::shoot()
 {
+	string input;
+
 	while (true)
 	{
-		board_.printShots();
-		string input;
+		//Skip printing shots if user asked for ship locations last to avoid double printing
+		if (input != "\\@")
+		{
+			board_.printShots();
+		}
+		
 		cout << SHOOT_COORD;
 		getline(cin, input);
 		if (input == "")
@@ -188,7 +202,8 @@ void Game::menu()
 		}
 
 		else if (userChoise == "2")
-		{
+		{	
+			//user has not placed the ships on gameboard yet, don't allow shooting
 			if (gameOver_ != 0)
 			{
 				cout << SHIPS_NOT_SET;
