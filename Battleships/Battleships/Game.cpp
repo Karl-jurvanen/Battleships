@@ -92,8 +92,9 @@ void Game::addShips()
 
 void Game::addShipsRandom()
 {
-	//use system time to generate random number
-	srand(time(NULL));
+	//use system time to generate random number 
+	//cast to unsigned int to avoid build warnings
+	srand(static_cast<unsigned int>(time(NULL)));
 	for (int i = 0; i < shipSizes_; i++)
 	{
 		for (int j = 0; j < shipList_[i]; j++)

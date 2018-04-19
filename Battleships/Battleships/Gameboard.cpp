@@ -87,7 +87,7 @@ void Gameboard::initialize()
 	}
 }
 
-bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
+bool Gameboard::addShip(int shipSize,  string coord, string dir)
 {
 	int x;
 	int y;
@@ -98,11 +98,11 @@ bool Gameboard::addShip(size_t shipSize,  string coord, string dir)
 	return false;
 }
 
-bool Gameboard::addShip(size_t shipSize, int x, int y, string dir)
+bool Gameboard::addShip(int shipSize, int x, int y, string dir)
 {
 	if (dir == "p")
 	{
-		for (size_t i = 0; i < shipSize; i++)
+		for (int i = 0; i < shipSize; i++)
 		{
 			if (!checkCoordinate(x, (y - i)))
 			{
@@ -117,7 +117,7 @@ bool Gameboard::addShip(size_t shipSize, int x, int y, string dir)
 
 		}
 		shiplist_[shipsAdded_].setSize(shipSize);
-		for (size_t i = 0; i < shipSize; i++)
+		for (int i = 0; i < shipSize; i++)
 		{
 			ships_[x][y - i] = shipsAdded_;
 		}
@@ -128,7 +128,7 @@ bool Gameboard::addShip(size_t shipSize, int x, int y, string dir)
 
 	else if (dir == "i")
 	{
-		for (size_t i = 0; i < shipSize; i++)
+		for (int i = 0; i < shipSize; i++)
 		{
 			if (!checkCoordinate((x + i), y))
 			{
@@ -143,7 +143,7 @@ bool Gameboard::addShip(size_t shipSize, int x, int y, string dir)
 
 		}
 		shiplist_[shipsAdded_].setSize(shipSize);
-		for (size_t i = 0; i < shipSize; i++)
+		for (int i = 0; i < shipSize; i++)
 		{
 			ships_[x + i][y] = shipsAdded_;
 		}
@@ -153,7 +153,7 @@ bool Gameboard::addShip(size_t shipSize, int x, int y, string dir)
 
 	else if (dir == "e")
 	{
-		for (size_t i = 0; i < shipSize; i++)
+		for (int i = 0; i < shipSize; i++)
 		{
 			if (!checkCoordinate(x, (y + i)))
 			{
@@ -168,7 +168,7 @@ bool Gameboard::addShip(size_t shipSize, int x, int y, string dir)
 
 		}
 		shiplist_[shipsAdded_].setSize(shipSize);
-		for (size_t i = 0; i < shipSize; i++)
+		for (int i = 0; i < shipSize; i++)
 		{
 			ships_[x][y + i] = shipsAdded_;
 		}
@@ -178,7 +178,7 @@ bool Gameboard::addShip(size_t shipSize, int x, int y, string dir)
 
 	else if (dir == "l")
 	{
-		for (size_t i = 0; i < shipSize; i++)
+		for (int i = 0; i < shipSize; i++)
 		{
 			if (!checkCoordinate((x - i), y))
 			{
@@ -193,7 +193,7 @@ bool Gameboard::addShip(size_t shipSize, int x, int y, string dir)
 
 		}
 		shiplist_[shipsAdded_].setSize(shipSize);
-		for (size_t i = 0; i < shipSize; i++)
+		for (int i = 0; i < shipSize; i++)
 		{
 			ships_[x - i][y] = shipsAdded_;
 		}
@@ -207,11 +207,11 @@ bool Gameboard::addShip(size_t shipSize, int x, int y, string dir)
 	}
 }
 
-bool Gameboard::addShipQuiet(size_t shipSize, int x, int y, string dir)
+bool Gameboard::addShipQuiet(int shipSize, int x, int y, string dir)
 {
 	if (dir == "p")
 	{
-		for (size_t i = 0; i < shipSize; i++)
+		for (int i = 0; i < shipSize; i++)
 		{
 			if (!checkCoordinate(x, (y - i)))
 			{
@@ -224,7 +224,7 @@ bool Gameboard::addShipQuiet(size_t shipSize, int x, int y, string dir)
 
 		}
 		shiplist_[shipsAdded_].setSize(shipSize);
-		for (size_t i = 0; i < shipSize; i++)
+		for (int i = 0; i < shipSize; i++)
 		{
 			ships_[x][y - i] = shipsAdded_;
 		}
@@ -235,7 +235,7 @@ bool Gameboard::addShipQuiet(size_t shipSize, int x, int y, string dir)
 
 	else if (dir == "i")
 	{
-		for (size_t i = 0; i < shipSize; i++)
+		for (int i = 0; i < shipSize; i++)
 		{
 			if (!checkCoordinate((x + i), y))
 			{
@@ -248,7 +248,7 @@ bool Gameboard::addShipQuiet(size_t shipSize, int x, int y, string dir)
 
 		}
 		shiplist_[shipsAdded_].setSize(shipSize);
-		for (size_t i = 0; i < shipSize; i++)
+		for (int i = 0; i < shipSize; i++)
 		{
 			ships_[x + i][y] = shipsAdded_;
 		}
@@ -258,7 +258,7 @@ bool Gameboard::addShipQuiet(size_t shipSize, int x, int y, string dir)
 
 	else if (dir == "e")
 	{
-		for (size_t i = 0; i < shipSize; i++)
+		for (int i = 0; i < shipSize; i++)
 		{
 			if (!checkCoordinate(x, (y + i)))
 			{
@@ -271,7 +271,7 @@ bool Gameboard::addShipQuiet(size_t shipSize, int x, int y, string dir)
 
 		}
 		shiplist_[shipsAdded_].setSize(shipSize);
-		for (size_t i = 0; i < shipSize; i++)
+		for (int i = 0; i < shipSize; i++)
 		{
 			ships_[x][y + i] = shipsAdded_;
 		}
@@ -281,7 +281,7 @@ bool Gameboard::addShipQuiet(size_t shipSize, int x, int y, string dir)
 
 	else if (dir == "l")
 	{
-		for (size_t i = 0; i < shipSize; i++)
+		for (int i = 0; i < shipSize; i++)
 		{
 			if (!checkCoordinate((x - i), y))
 			{
@@ -294,7 +294,7 @@ bool Gameboard::addShipQuiet(size_t shipSize, int x, int y, string dir)
 
 		}
 		shiplist_[shipsAdded_].setSize(shipSize);
-		for (size_t i = 0; i < shipSize; i++)
+		for (int i = 0; i < shipSize; i++)
 		{
 			ships_[x - i][y] = shipsAdded_;
 		}
