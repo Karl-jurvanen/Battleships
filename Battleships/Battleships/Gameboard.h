@@ -14,8 +14,6 @@ const string MISSED_SHIP = "\nLaukaus kohtaan  ei osunut.\n\n";
 const string HIT_SHIP = "\nLaukaus kohtaan  osui laivaan.\n\n";
 const string SUNK_SHIP = "\nLaukaus kohtaan  upotti laivan.\n\n";
 
-enum Direction { North, East, South, West };
-
 class Gameboard
 {
 public:
@@ -57,6 +55,8 @@ private:
 
 	//Function that parses user input into coordinates on the game board
 	bool parseCoordinates(int& x, int& y, string input) const;
+	
+	//Function that checks if given coordinate is valid
 	bool checkCoordinate(int x, int y) const;
 
 };
