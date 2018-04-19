@@ -5,9 +5,10 @@ using std::string;
 
 static const int SHIPS_IN_GAME[] = { 1,1,1,1 };  // number of ships of each size 5, 4, 3, 2
 
-const string SHIP_ALREADY_THERE = "Ship already there.\n\n";
-const string SHIP_OUT_OF_BOUNDS = "Ship goes off game board.\n\n";
+const string SHIP_ALREADY_THERE = "Koordinaatissa on jo laiva.\n\n";
+const string SHIP_OUT_OF_BOUNDS = "Laiva menee pelilaudan ulkopuolelle.\n\n";
 const string BAD_COORDINATE = "Virheellinen koordinaatti.\n\n";
+const string BAD_DIRECTION = "Virheellinen suunta.\n\n";
 const string BAD_INPUT = "Virheellinen syote\n";
 const string ALREADY_SHOT_THERE = "Kohtaan  on jo ammuttu.\n\n";
 const string MISSED_SHIP = "\nLaukaus kohtaan  ei osunut.\n\n";
@@ -26,9 +27,8 @@ public:
 	int getBoardSize()const;
 
 	void initialize();
-	bool addShip(int shipSize,  string coord, string dir);
-	bool addShip(int shipSize, int x, int y, string dir);
-	bool addShipQuiet(int shipSize, int x, int y, string dir);
+	int addShip(int shipSize,  string coord, string dir);
+	int addShip(int shipSize, int x, int y, string dir);
 	bool shoot(string coord);
 	void sinkShip(int shipIndes);
 	void printShots() const;

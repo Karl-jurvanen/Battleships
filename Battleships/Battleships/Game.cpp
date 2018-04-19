@@ -78,10 +78,25 @@ void Game::addShips()
 				getline(cin, coordinate);
 				cout << ADD_SHIP_DIR;
 				getline(cin, direction);
-				if (board_.addShip(sizeToAdd, coordinate, direction))
+				int result = board_.addShip(sizeToAdd, coordinate, direction);
+
+
+				if (result == 0) //success
 				{
 					board_.printShips();
 					break;
+				}
+				else if (result == 1)
+				{
+					cout << BAD_DIRECTION;
+				}
+				else if (result == 2)
+				{
+					cout << SHIP_OUT_OF_BOUNDS;
+				}
+				else if (result == 3)
+				{
+					cout << SHIP_ALREADY_THERE;
 				}
 			}		
 		}
@@ -123,9 +138,8 @@ void Game::addShipsRandom()
 					break;
 				}
 
-				if (board_.addShipQuiet(sizeToAdd, x, y, direction))
+				if (board_.addShip(sizeToAdd, x, y, direction) == 0)
 				{
-					
 					break;
 				}
 			}
