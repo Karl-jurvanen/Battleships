@@ -1,7 +1,6 @@
 #include "Game.h"
 #include <string>
 #include <iostream>
-#include <stdlib.h>
 #include <time.h>
 
 using std::cout;
@@ -55,6 +54,8 @@ void Game::addShips()
 				string message = ADD_SHIP_START;
 				string coordinate;
 				string direction;
+
+				//insert in the print out the correct word for ship size
 				switch (sizeToAdd)
 				{
 				case 2: cout << message.insert(5, "kahden");
