@@ -23,32 +23,33 @@ int main()
 	int boardsize;
 	int* ships;
 	int longestShip = 0;
-	readSettings("laiva.txt", boardsize, ships, longestShip);
 
-	for (int i = 0; i < longestShip -1; i++)
+	//if config file is not found or is broken, start game with default settings
+	if (! readSettings("laiva.txt", boardsize, ships, longestShip))
 	{
-		cout << ships[i] << endl;
+		Game testgame;
+		testgame.menu(); // begin game
 	}
-
-	string input;
-
-	cout << "Anna kentan sivu";
-	getline(cin, input);
-	int size;
-	try
+	else
 	{
-		size = stoi(input);
+		int shipCount = 0;
+		for (int i = 0; i < longestShip - 1; i++)
+		{
+			//	cout << ships[i] << endl;
+			shipCount += ships[i];
+		}
 
+		//cout << "ships: " << shipCount;
+
+		Game testgame(boardsize, ships, longestShip - 1, shipCount);
+
+		delete[] ships; // array that was used for reading config file is no longer needed
+		testgame.menu(); // begin game
 	}
-	catch (const std::invalid_argument&)
-	{
-		//catch possible exception from converting the string to int
-		cout << "Virheellinen syote." << endl;
-		return false;
-	}
-	int laivat[4] = { 4,3,2,1 };
-	Game testgame(size, laivat, 4, 10);
-	testgame.menu();
+	
+
+
+	
 
 
 	system("pause");
@@ -77,7 +78,6 @@ bool readSettings(string settingsFile, int& boardsize, int*& ships, int& longest
 		else
 		{
 			string contents[10];
-			cout << line << endl;
 			istringstream ss(line);
 
 			int count = 0;
@@ -136,8 +136,6 @@ bool readSettings(string settingsFile, int& boardsize, int*& ships, int& longest
 					//to get index of current pair (eg. 5:2)
 					int shipIndex = longest_ship - (contents[i].at(0) - '0');
 					int shipCount = contents[i].at(2) - '0';
-
-					//cout << shipIndex << " | " << shipCount << endl;
 					ships[shipIndex] = shipCount;
 				}
 				longest = longest_ship;
