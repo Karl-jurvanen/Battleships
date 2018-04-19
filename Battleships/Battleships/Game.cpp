@@ -78,9 +78,10 @@ void Game::addShips()
 				getline(cin, coordinate);
 				cout << ADD_SHIP_DIR;
 				getline(cin, direction);
+
 				int result = board_.addShip(sizeToAdd, coordinate, direction);
 
-
+				//Check result, if not succesfull continue loop to ask user to try again
 				if (result == 0) //success
 				{
 					board_.printShips();
