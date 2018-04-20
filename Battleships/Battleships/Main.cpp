@@ -21,9 +21,6 @@ bool readSettings(string settingsFile, int& boardsize, int*& ships, int& longest
 int main()
 {
 
-
-	for (size_t i = 0; i < 10000; i++)
-	{
 		int boardsize;
 		int* ships;
 		int longestShip = 0;
@@ -32,9 +29,9 @@ int main()
 		if (!readSettings("laiva.txt", boardsize, ships, longestShip))
 		{
 			Game testgame;
-			//testgame.menu(); // begin game
+			testgame.menu(); // begin game
 		}
-		else
+		else // readSettings was succesful in getting configurations
 		{
 			int shipCount = 0;
 			for (int i = 0; i < longestShip - 1; i++)
@@ -48,16 +45,10 @@ int main()
 			Game testgame(boardsize, ships, longestShip - 1, shipCount);
 
 			delete[] ships; // array that was used for reading config file is no longer needed
-			//testgame.menu(); // begin game
+			testgame.menu(); // begin game
 		}
 	
-	}
 	
-
-
-	
-
-
 	system("pause");
 }
 
@@ -99,16 +90,13 @@ bool readSettings(string settingsFile, int& boardsize, int*& ships, int& longest
 					try
 					{
 						boardsize = stoi(contents[1]);
-
 					}
 					//catch possible exception from converting the string to int
 					catch (const std::invalid_argument&)
 					{
-						//delete possible dynamic memory before returning 
-						if (flag == 1) { delete[] ships; }
+						if (flag == 1) { delete[] ships; }//delete possible dynamic memory before returning 
 						return false;
 					}
-
 				}
 
 				else if (contents[0] == "laivat:" )
@@ -150,10 +138,7 @@ bool readSettings(string settingsFile, int& boardsize, int*& ships, int& longest
 					
 					longest = longest_ship;
 
-				}
-
-
-				
+				}	
 			}
 
 			//assume that the file is bad if any exceptions are thrown
@@ -164,8 +149,6 @@ bool readSettings(string settingsFile, int& boardsize, int*& ships, int& longest
 				if (flag == 1) { delete[] ships; }
 				return false;
 			}
-
-
 		}
 	}
 
@@ -176,6 +159,6 @@ bool readSettings(string settingsFile, int& boardsize, int*& ships, int& longest
 		
 		return false;
 	}
-	return true;
 	file.close();
+	return true;
 }
