@@ -103,7 +103,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -170,7 +170,6 @@
     </ClCompile>
     <ClCompile Include="unittest1.cpp" />
     <ClCompile Include="unittest2.cpp" />
-    <ClCompile Include="unittest3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Battleships\Battleships.vcxproj">

@@ -55,8 +55,8 @@ namespace TestProject
 				"F |               | F\n"
 				"G |               | G\n"
 				"  -----------------\n"
-				"    1 2 3 4 5 6 7 \n";
-
+				"    1 2 3 4 5 6 7 \n\n";
+			
 			Assert::AreEqual(output, expected);
 		}
 
@@ -98,7 +98,7 @@ namespace TestProject
 				"E |             | E\n"
 				"F |             | F\n"
 				"  ---------------\n"
-				"    1 2 3 4 5 6 \n";
+				"    1 2 3 4 5 6 \n\n";
 
 
 			Assert::AreEqual(output, expected);
@@ -130,7 +130,7 @@ namespace TestProject
 				"F |               | F\n"
 				"G |               | G\n"
 				"  -----------------\n"
-				"    1 2 3 4 5 6 7 \n";
+				"    1 2 3 4 5 6 7 \n\n";
 
 			Assert::AreEqual(output, expected);
 		}
@@ -162,7 +162,7 @@ namespace TestProject
 				"G |                 | G\n"
 				"H |                 | H\n"
 				"  -------------------\n"
-				"    1 2 3 4 5 6 7 8 \n";
+				"    1 2 3 4 5 6 7 8 \n\n";
 
 			Assert::AreEqual(output, expected);
 		}
@@ -195,7 +195,7 @@ namespace TestProject
 				"H |                   | H\n"
 				"I |                   | I\n"
 				"  ---------------------\n"
-				"    1 2 3 4 5 6 7 8 9 \n";
+				"    1 2 3 4 5 6 7 8 9 \n\n";
 
 			Assert::AreEqual(output, expected);
 		}
@@ -226,7 +226,7 @@ namespace TestProject
 				"E | 5           | E\n"
 				"F |             | F\n"
 				"  ---------------\n"
-				"    1 2 3 4 5 6 \n";
+				"    1 2 3 4 5 6 \n\n";
 
 			Assert::AreEqual(output, expected);
 		}
@@ -258,7 +258,7 @@ namespace TestProject
 				"F |               | F\n"
 				"G |               | G\n"
 				"  -----------------\n"
-				"    1 2 3 4 5 6 7 \n";
+				"    1 2 3 4 5 6 7 \n\n";
 
 			Assert::AreEqual(output, expected);
 		}
@@ -291,7 +291,7 @@ namespace TestProject
 				"G |                 | G\n"
 				"H |                 | H\n"
 				"  -------------------\n"
-				"    1 2 3 4 5 6 7 8 \n";
+				"    1 2 3 4 5 6 7 8 \n\n";
 
 			Assert::AreEqual(output, expected);
 		}
@@ -325,7 +325,7 @@ namespace TestProject
 				"H |                   | H\n"
 				"I |                   | I\n"
 				"  ---------------------\n"
-				"    1 2 3 4 5 6 7 8 9 \n";
+				"    1 2 3 4 5 6 7 8 9 \n\n";
 
 			Assert::AreEqual(output, expected);
 		}
@@ -334,87 +334,35 @@ namespace TestProject
 		//Test output when user tries to add ship on top of another ship
 		//Expected result is an error message
 		TEST_METHOD(Gameboard_Overlapping_Ships_6)
-		{
-			std::stringstream oss;
-			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
-			std::cout.rdbuf(oss.rdbuf());
-
+		{			
 			Gameboard game(6,2);
-
 			game.addShip(5, "A1", "e");
-			game.addShip(5, "A1", "e");
-			
-
-			string output = oss.str();
-			//Logger::WriteMessage(output);
-			std::cout.rdbuf(p_cout_streambuf);
-
-			string expected = SHIP_ALREADY_THERE;
-
-			Assert::AreEqual(output, expected);
+			int output = game.addShip(5, "A1", "e");			
+			Assert::AreEqual(output, 3);
 		}
 
 		TEST_METHOD(Gameboard_Overlapping_Ships_7)
 		{
-			std::stringstream oss;
-			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
-			std::cout.rdbuf(oss.rdbuf());
-
 			Gameboard game(7,2);
-
 			game.addShip(5, "A6", "e");
-			game.addShip(5, "C6", "e");
-
-
-			string output = oss.str();
-			//Logger::WriteMessage(output);
-			std::cout.rdbuf(p_cout_streambuf);
-
-			string expected = SHIP_ALREADY_THERE;
-
-			Assert::AreEqual(output, expected);
+			int output = game.addShip(5, "C6", "e");
+			Assert::AreEqual(output, 3);
 		}
 
 		TEST_METHOD(Gameboard_Ship_Out_Of_Bounds_6)
 		{
-			std::stringstream oss;
-			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
-			std::cout.rdbuf(oss.rdbuf());
-
 			Gameboard game(6,2);
 
-			game.addShip(5, "A6", "p");
-			
-
-
-			string output = oss.str();
-			//Logger::WriteMessage(output);
-			std::cout.rdbuf(p_cout_streambuf);
-
-			string expected = SHIP_OUT_OF_BOUNDS;
-
-			Assert::AreEqual(output, expected);
+			int output = game.addShip(5, "A6", "p");
+			Assert::AreEqual(output, 2);
 		}
 
 		TEST_METHOD(Gameboard_Ship_Out_Of_Bounds_7)
 		{
-			std::stringstream oss;
-			std::streambuf* p_cout_streambuf = std::cout.rdbuf();
-			std::cout.rdbuf(oss.rdbuf());
-
 			Gameboard game(7,2);
 
-			game.addShip(5, "G7", "i");
-
-
-
-			string output = oss.str();
-			//Logger::WriteMessage(output);
-			std::cout.rdbuf(p_cout_streambuf);
-
-			string expected = "Ship goes off game board.\n\n";
-
-			Assert::AreEqual(output, expected);
+			int output = game.addShip(5, "G7", "i");
+			Assert::AreEqual(output, 2);
 		}
 
 		TEST_METHOD(Gameboard_Bad_Coordinate_7)
