@@ -34,10 +34,6 @@ Game::Game(int boardsize, int shipList[], int shipSizes, int shipCount): shipSiz
 
 Game::~Game()
 {
-	for (int i = 0; i < shipSizes_; i++)
-	{
-		cout << shipList_[i];
-	}
 	delete[] shipList_;
 }
 

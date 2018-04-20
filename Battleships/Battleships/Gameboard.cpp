@@ -49,8 +49,6 @@ Gameboard::~Gameboard()
 	delete[] shots_;
 	delete[] ships_;
 	delete[] shiplist_;
-
-	cout << "Gameboard destructor." << endl;
 }
 
 char ** Gameboard::getShots() const
