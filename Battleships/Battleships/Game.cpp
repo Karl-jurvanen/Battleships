@@ -190,6 +190,18 @@ void Game::shoot()
 
 void Game::shootRandom()
 {
+	while (true)
+	{
+		
+		if (board_.checkGameOver())
+		{
+			board_.printShots();
+			cout << "Peli loppui.\n\n";
+			gameOver_ = 1;
+			break;
+		}
+	}
+	
 }
 
 void Game::menu()

@@ -30,6 +30,7 @@ public:
 	int addShip(int shipSize,  string coord, string dir);
 	int addShip(int shipSize, int x, int y, string dir);
 	bool shoot(string coord, string& message);
+	int shoot(int x, int y);
 	void sinkShip(int shipIndes);
 	void printShots() const;
 	void printShips() const;

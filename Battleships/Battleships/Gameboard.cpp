@@ -221,48 +221,71 @@ bool Gameboard::shoot(string coord, string& message)
 	string output;
 	if (parseCoordinates(x, y, coord))
 	{
-		//check if we the coordinate has already been shot at
-		if (shots_[x][y] != 0)
+
+		int result = shoot(x, y);
+
+		switch (result)
 		{
+		case 0:
+			output = MISSED_SHIP;
+			message = output.insert(17, coord);
+			return true;
+		case 1:
+			output = HIT_SHIP;
+			message = output.insert(17, coord);
+			return true;
+		case 2:
+			output = SUNK_SHIP;
+			message = output.insert(17, coord);
+			return true;
+		case 3:
 			output = ALREADY_SHOT_THERE;
-			message = output.insert(8, coord);
+			message = output.insert(9, coord);
 			return false;
+		}
+		//check if we the coordinate has already been shot at
+	}
+}
+
+/*
+return 
+0 for miss
+1 for hit
+2 for sunk ship
+3 for already shot there
+*/
+int Gameboard::shoot(int x, int y)
+{
+	if (shots_[x][y] != 0)
+	{
+		return 3; //have already shot there
+	}
+	else
+	{
+		//Check if there is ship there
+		if (ships_[x][y] == -1)
+		{
+			shots_[x][y] = 'X';
+			return 0; // miss
 		}
 		else
 		{
-			//Check if there is ship there
-			if (ships_[x][y] == -1)
+			int target = ships_[x][y];
+			shiplist_[target].hit();
+			//Check if the target that was hit sinks 
+			if (shiplist_[target].getHits() == shiplist_[target].getSize())
 			{
-				output = MISSED_SHIP;
-				message = output.insert(17, coord);
-				
-				shots_[x][y] = 'X';
-				return true;
+				sinkShip(target);
+				return 2; // ship sunk
 			}
 			else
+				//Ship was hit but it did not sink
 			{
-				
-				int target = ships_[x][y];
-				shiplist_[target].hit();
-				//Check if the target that was hit sinks 
-				if (shiplist_[target].getHits() == shiplist_[target].getSize())
-				{
-					output = SUNK_SHIP;
-					message = output.insert(17, coord) ;
-					sinkShip(target);
-				}
-				else
-					//Ship was hit but it did not sink
-				{
-					output = HIT_SHIP;
-					message = output.insert(17, coord);
-					shots_[x][y] = '*';
-				}
-				return true;
+				shots_[x][y] = '*';
 			}
+			return 1; // ship hit
 		}
 	}
-	return false;
 }
 
 void Gameboard::sinkShip(int shipIndes)
