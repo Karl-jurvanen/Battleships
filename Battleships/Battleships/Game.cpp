@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 #include <time.h>
-
+#include <Windows.h>
 using std::cout;
 using std::cin;
 using std::endl;
@@ -119,8 +119,8 @@ void Game::addShipsRandom()
 				int dir;
 				string direction;
 
-				x = rand() % (board_.getBoardSize() -1);
-				y = rand() % (board_.getBoardSize() -1);
+				x = rand() % (board_.getBoardSize() );
+				y = rand() % (board_.getBoardSize() );
 				dir = rand() % 3;
 
 				switch (dir)
@@ -190,9 +190,26 @@ void Game::shoot()
 
 void Game::shootRandom()
 {
+	srand(static_cast<unsigned int>(time(NULL)));
+
+	int x;
+	int y;
+
+	board_.printShots();
+
 	while (true)
 	{
-		
+		x = rand() % (board_.getBoardSize() );
+		y = rand() % (board_.getBoardSize() );
+
+		if (board_.shoot(x, y) != 3) // successfull shot
+		{
+			board_.printShots();
+
+			cout << x << " | " << y << endl;
+			Sleep(500);
+		}
+
 		if (board_.checkGameOver())
 		{
 			board_.printShots();
