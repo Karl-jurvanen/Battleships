@@ -199,6 +199,7 @@ void Game::shootRandom()
 
 	while (true)
 	{
+		int** values = board_.calculateValues();
 		x = rand() % (board_.getBoardSize() );
 		y = rand() % (board_.getBoardSize() );
 
@@ -217,6 +218,32 @@ void Game::shootRandom()
 		}
 	}
 	
+}
+
+void Game::shootAI()
+{
+	board_.printShots();
+	while (true)
+	{
+		int x = 0;
+		int y = 0;
+
+		board_.getBestTarget(x, y);
+
+		if (board_.shoot(x, y) != 3) // successfull shot
+		{
+			board_.printShots();
+			Sleep(500);
+		}
+
+		if (board_.checkGameOver())
+		{
+			board_.printShots();
+			cout << "Peli loppui.\n\n";
+			gameOver_ = 1;
+			break;
+		}
+	}
 }
 
 void Game::menu()
@@ -272,7 +299,8 @@ void Game::menu()
 			}
 			else
 			{
-				shootRandom();
+				//shootRandom();
+				shootAI();
 			}
 		}
 		else if (userChoise == "L" || userChoise == "l")

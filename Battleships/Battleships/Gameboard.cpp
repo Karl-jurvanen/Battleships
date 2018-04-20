@@ -12,11 +12,12 @@ Gameboard::Gameboard(int boardSize, int shipCount) :boardSize_(boardSize), shipC
 
 	shots_ = new char*[boardSize_];
 	ships_ = new int*[boardSize_];
-
+	values_ = new int*[boardSize_];
 	for (int i = 0; i < boardSize_; i++)
 	{
 		shots_[i] = new char[boardSize_];
 		ships_[i] = new int[boardSize_];
+		values_[i] = new int[boardSize_];
 	}
 
 	//Initialize both gameboards to empty
@@ -29,11 +30,12 @@ Gameboard::Gameboard():boardSize_(7), shipCount_(4), shipsAdded_(0), shipsSunk_(
 
 	shots_ = new char*[boardSize_];
 	ships_ = new int*[boardSize_];
-
+	values_ = new int*[boardSize_];
 	for (int i = 0; i < boardSize_; i++)
 	{
 		shots_[i] = new char[boardSize_];
 		ships_[i] = new int[boardSize_];
+		values_[i] = new int[boardSize_];
 	}
 	initialize();
 }
@@ -45,10 +47,12 @@ Gameboard::~Gameboard()
 	{
 		delete[] shots_[i];
 		delete[] ships_[i];
+		delete[] values_[i];
 	}
 	delete[] shots_;
 	delete[] ships_;
 	delete[] shiplist_;
+	delete[] values_;
 }
 
 char ** Gameboard::getShots() const
@@ -59,6 +63,11 @@ char ** Gameboard::getShots() const
 int ** Gameboard::getShips() const
 {
 	return ships_;
+}
+
+int ** Gameboard::getValues() const
+{
+	return values_;
 }
 
 int Gameboard::getBoardSize() const
@@ -75,7 +84,7 @@ void Gameboard::initialize()
 		{
 			shots_[i][j] = 0;
 			ships_[i][j] = -1;
-			
+			values_[i][j] = 0;
 		}
 	}
 	shipsAdded_ = 0;
@@ -247,7 +256,7 @@ bool Gameboard::shoot(string coord, string& message)
 	}
 }
 
-/*
+/**
 return 
 0 for miss
 1 for hit
@@ -288,7 +297,7 @@ int Gameboard::shoot(int x, int y)
 	}
 }
 
-void Gameboard::sinkShip(int shipIndes)
+void Gameboard::sinkShip(int shipIndex)
 {
 	//Loop through shots_ and change value to # where ships_ == shipindex
 	
@@ -296,7 +305,7 @@ void Gameboard::sinkShip(int shipIndes)
 	{
 		for (int x = 0; x < boardSize_; x++)
 		{
-			if (ships_[x][y] == shipIndes)
+			if (ships_[x][y] == shipIndex)
 			{
 				shots_[x][y] = '#';
 			}
@@ -362,6 +371,52 @@ void Gameboard::printShips() const
 	}
 
 	printFooter();
+}
+
+//calculate a value for each coordinate. Higher value means better chance of hitting a ship
+int** Gameboard::calculateValues()
+
+{
+
+
+	for (int y = 0; y < boardSize_; y++)
+	{
+		for (int x = 0; x < boardSize_; x++)
+		{
+			values_[x][y] = 0; // zero the previous calculation
+
+			//give heavy penalty if coordinate has been shot at already
+			if ( (shots_[x][y] == '#') || (shots_[x][y] == '*') || (shots_[x][y] == 'X'))
+			{
+				values_[x][y] = -10000;
+			}
+			//change value based on neighbors
+
+			values_[x][y] += checkNeighbors(x,y);
+		}
+	}
+
+	return values_;
+}
+
+void Gameboard::getBestTarget(int & x, int & y)
+{
+	calculateValues();
+	int bestValue = -1000;
+
+	for (int i = 0; i < boardSize_; i++)
+	{
+		for (int j = 0; j < boardSize_; j++)
+		{
+			if (values_[j][i] > bestValue) // check if current coordinate has greater value than best so far
+			{
+				bestValue = values_[j][i];
+				x = j;
+				y = i;
+			}
+		}
+	}
+	return;
 }
 
 bool Gameboard::checkGameOver() const
@@ -452,5 +507,50 @@ bool Gameboard::checkCoordinate(int x, int y) const
 {
 
 	return  ((x >= 0 && y >= 0) && (x < boardSize_ && y < boardSize_));
+}
+
+int Gameboard::checkNeighbors(int x, int y)
+{
+	int value = 0;
+
+	if (checkCoordinate(x, y+1))	//south neighbor
+	{
+		value += getNeighborValue(x, y + 1);
+	}
+
+	if (checkCoordinate(x, y - 1))	//north neighbor
+	{
+		value += getNeighborValue(x, y - 1);
+	}
+
+	if (checkCoordinate(x +1, y )) // east neighbor
+	{
+		value += getNeighborValue(x + 1, y);
+	}
+
+	if (checkCoordinate(x -1, y)) // west neighbor
+	{
+		value += getNeighborValue(x - 1 ,y);
+	}
+
+	return value;
+}
+
+int Gameboard::getNeighborValue(int x, int y)
+{
+	//Reduce value if neighbor is 'X' or '#'
+	//increase if neighbor is '*'
+	if (shots_[x][y] == 'X')
+	{
+		return -100;
+	}
+	else if (shots_[x][y] == '*')
+	{
+		return 300;
+	}
+	else if (shots_[x][y] == '#')
+	{
+		return -100;
+	}
 }
 

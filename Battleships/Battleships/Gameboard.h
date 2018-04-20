@@ -23,7 +23,8 @@ public:
 	~Gameboard();
 
 	char ** getShots() const;
-	int ** getShips()const;
+	int ** getShips() const;
+	int ** getValues() const;
 	int getBoardSize()const;
 
 	void initialize();
@@ -31,9 +32,13 @@ public:
 	int addShip(int shipSize, int x, int y, string dir);
 	bool shoot(string coord, string& message);
 	int shoot(int x, int y);
-	void sinkShip(int shipIndes);
+	void sinkShip(int shipIndex);
 	void printShots() const;
 	void printShips() const;
+
+	//functions used by shooting AI to find best target
+	int** calculateValues();
+	void getBestTarget(int& x, int& y);
 	
 	bool checkGameOver()const;
 	
@@ -48,7 +53,7 @@ private:
 	int boardSize_;
 	char **shots_;
 	int ** ships_;
-
+	int ** values_;
 
 	//helper functions for printing game boards
 	void printHeader() const;
@@ -59,6 +64,10 @@ private:
 	
 	//Function that checks if given coordinate is valid
 	bool checkCoordinate(int x, int y) const;
+
+	//function for getting value for coordinate based on neighbors
+	int checkNeighbors(int x, int y);
+	int getNeighborValue(int x, int y);
 
 };
 
