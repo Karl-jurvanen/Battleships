@@ -205,8 +205,6 @@ void Game::shootRandom()
 		if (board_.shoot(x, y) != 3) // successfull shot
 		{
 			board_.printShots();
-
-			cout << x << " | " << y << endl;
 			Sleep(500);
 		}
 
