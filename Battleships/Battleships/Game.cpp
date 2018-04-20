@@ -188,6 +188,10 @@ void Game::shoot()
 	}
 }
 
+void Game::shootRandom()
+{
+}
+
 void Game::menu()
 {
 	const string menuText =
@@ -198,6 +202,7 @@ void Game::menu()
 		"1) Syota laivat\n"
 		"2) Pelaa\n"
 		"3) Arvo sijainnit\n"
+		"4) Simuloi ampuminen\n"
 		"L) Lopeta\n\n"
 		"Valintasi: ";
 
@@ -231,6 +236,17 @@ void Game::menu()
 		{
 			board_.initialize();
 			addShipsRandom();
+		}
+		else if (userChoise == "4")
+		{
+			if (gameOver_ != 0)
+			{
+				cout << SHIPS_NOT_SET;
+			}
+			else
+			{
+				shootRandom();
+			}
 		}
 		else if (userChoise == "L" || userChoise == "l")
 		{

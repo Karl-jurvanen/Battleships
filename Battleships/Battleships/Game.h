@@ -18,6 +18,7 @@ public:
 	void addShips();
 	void addShipsRandom();
 	void shoot();
+	void shootRandom();
 	void menu();
 
 private:
