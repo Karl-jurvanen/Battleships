@@ -211,9 +211,10 @@ int Gameboard::addShip(int shipSize, int x, int y, string dir)
 	}
 }
 
+
 //Shoot function retuens true if shooting is succesfull (hit or miss)
 //and returns false if shooting failed (illegal coordinate or shooting in the same spot again)
-bool Gameboard::shoot(string coord)
+bool Gameboard::shoot(string coord, string& message)
 {
 	int x;
 	int y;
@@ -224,7 +225,7 @@ bool Gameboard::shoot(string coord)
 		if (shots_[x][y] != 0)
 		{
 			output = ALREADY_SHOT_THERE;
-			cout << output.insert(8, coord) << endl;
+			message = output.insert(8, coord);
 			return false;
 		}
 		else
@@ -233,7 +234,8 @@ bool Gameboard::shoot(string coord)
 			if (ships_[x][y] == -1)
 			{
 				output = MISSED_SHIP;
-				cout << output.insert(17, coord);
+				message = output.insert(17, coord);
+				
 				shots_[x][y] = 'X';
 				return true;
 			}
@@ -246,14 +248,14 @@ bool Gameboard::shoot(string coord)
 				if (shiplist_[target].getHits() == shiplist_[target].getSize())
 				{
 					output = SUNK_SHIP;
-					cout << output.insert(17, coord) ;
+					message = output.insert(17, coord) ;
 					sinkShip(target);
 				}
 				else
 					//Ship was hit but it did not sink
 				{
 					output = HIT_SHIP;
-					cout << output.insert(17, coord);
+					message = output.insert(17, coord);
 					shots_[x][y] = '*';
 				}
 				return true;

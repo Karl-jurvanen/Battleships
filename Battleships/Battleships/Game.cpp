@@ -174,8 +174,9 @@ void Game::shoot()
 			board_.printShips();
 			continue;
 		}
-		board_.shoot(input);
-		
+		string printout;
+		board_.shoot(input, printout);
+		cout << printout;
 
 		if (board_.checkGameOver())
 		{
