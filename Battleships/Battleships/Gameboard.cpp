@@ -79,6 +79,7 @@ void Gameboard::initialize()
 		}
 	}
 	shipsAdded_ = 0;
+	shipsSunk_ = 0;
 	for (int i = 0; i < shipCount_; i++)
 	{
 		shiplist_[i] = Ship();	
@@ -221,7 +222,6 @@ bool Gameboard::shoot(string coord, string& message)
 	string output;
 	if (parseCoordinates(x, y, coord))
 	{
-
 		int result = shoot(x, y);
 
 		switch (result)
