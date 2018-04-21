@@ -254,6 +254,7 @@ bool Gameboard::shoot(string coord, string& message)
 		}
 		//check if we the coordinate has already been shot at
 	}
+	return false;
 }
 
 /**
@@ -374,49 +375,36 @@ void Gameboard::printShips() const
 }
 
 //calculate a value for each coordinate. Higher value means better chance of hitting a ship
-int** Gameboard::calculateValues()
-
+//also find the best value 
+int Gameboard::calculateValues(int & x, int & y)
 {
-
-
-	for (int y = 0; y < boardSize_; y++)
-	{
-		for (int x = 0; x < boardSize_; x++)
-		{
-			values_[x][y] = 0; // zero the previous calculation
-
-			//give heavy penalty if coordinate has been shot at already
-			if ( (shots_[x][y] == '#') || (shots_[x][y] == '*') || (shots_[x][y] == 'X'))
-			{
-				values_[x][y] = -10000;
-			}
-			//change value based on neighbors
-
-			values_[x][y] += checkNeighbors(x,y);
-		}
-	}
-
-	return values_;
-}
-
-void Gameboard::getBestTarget(int & x, int & y)
-{
-	calculateValues();
 	int bestValue = -1000;
-
-	for (int i = 0; i < boardSize_; i++)
+	for (int j = 0; j < boardSize_; j++)
 	{
-		for (int j = 0; j < boardSize_; j++)
+		for (int i = 0; i < boardSize_; i++)
 		{
-			if (values_[j][i] > bestValue) // check if current coordinate has greater value than best so far
+			values_[i][j] = 0; // zero the previous calculation
+
+			//give heavjy penalty if coordinate has been shot at already
+			if ((shots_[i][j] == '#') || (shots_[i][j] == '*') || (shots_[i][j] == 'X'))
 			{
-				bestValue = values_[j][i];
-				x = j;
-				y = i;
+				values_[i][j] = -10000;
+			}
+
+			//change value based on neighbors
+			values_[i][j] += checkNeighbors(i, j);
+
+			if (values_[i][j] > bestValue)
+			{
+				//update the coordinate of best value
+				bestValue = values_[i][j];
+				x = i;
+				y = j;
 			}
 		}
 	}
-	return;
+	//return the best value and the coordinate as references
+	return bestValue;
 }
 
 bool Gameboard::checkGameOver() const
@@ -615,5 +603,6 @@ int Gameboard::getNeighborValue(int x, int y)
 	{
 		return 1;
 	}
+	return 0;
 }
 

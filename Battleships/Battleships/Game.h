@@ -19,7 +19,12 @@ public:
 	void addShipsRandom();
 	void shoot();
 	void shootRandom();
-	void shootAI();
+	int shootRandomStatistics();
+
+	int shootAI();
+	int shootAIStatistics();
+ 
+	void simulateShooting(int simulationtimes, string logfile);
 	void menu();
 
 private:
