@@ -515,22 +515,81 @@ int Gameboard::checkNeighbors(int x, int y)
 
 	if (checkCoordinate(x, y+1))	//south neighbor
 	{
-		value += getNeighborValue(x, y + 1);
+		int thisvalue = getNeighborValue(x, y + 1);
+
+		value += thisvalue;
+
+
+		if (thisvalue == 400) //check if two hits in a row
+		{
+			if (checkCoordinate(x , y + 2))
+			{
+				if (getNeighborValue(x, y + 2) == 400)
+				{
+					value += 3000;
+				}
+			}
+		}
+		 
 	}
 
 	if (checkCoordinate(x, y - 1))	//north neighbor
 	{
-		value += getNeighborValue(x, y - 1);
+
+		int thisvalue = getNeighborValue(x, y - 1);
+		value += thisvalue;
+
+
+		if (thisvalue == 400) //check if two hits in a row
+		{
+			if (checkCoordinate(x , y - 2))
+			{
+				if (getNeighborValue(x, y - 2) == 400)
+				{
+					value += 3000;
+				}
+			}
+		}
 	}
 
 	if (checkCoordinate(x +1, y )) // east neighbor
 	{
-		value += getNeighborValue(x + 1, y);
+
+		int thisvalue = getNeighborValue(x + 1, y);
+		value += thisvalue;
+
+
+		if (thisvalue == 400) //check if two hits in a row
+		{
+			if (checkCoordinate(x + 2, y))
+			{
+				if (getNeighborValue(x +2, y) == 400)
+				{
+					value += 3000;
+				}
+			}
+		}  
+
 	}
 
 	if (checkCoordinate(x -1, y)) // west neighbor
 	{
-		value += getNeighborValue(x - 1 ,y);
+
+		int thisvalue = getNeighborValue(x - 1, y);
+
+		value += thisvalue;
+
+
+		if (thisvalue == 400) //check if two hits in a row
+		{
+			if (checkCoordinate(x - 2, y))
+			{
+				if (getNeighborValue(x - 2 , y ) == 400)
+				{
+					value += 3000;
+				}
+			}
+		}
 	}
 
 	return value;
@@ -546,11 +605,15 @@ int Gameboard::getNeighborValue(int x, int y)
 	}
 	else if (shots_[x][y] == '*')
 	{
-		return 300;
+		return 400;
 	}
 	else if (shots_[x][y] == '#')
 	{
 		return -100;
+	}
+	else if (shots_[x][y] == 0)
+	{
+		return 1;
 	}
 }
 
