@@ -1,7 +1,6 @@
 #include "Game.h"
 #include <string>
 #include <iostream>
-#include <fstream>
 #include <time.h>
 #include <Windows.h>
 using std::cout;
@@ -10,12 +9,9 @@ using std::endl;
 using std::getline;
 using std::string;
 
-using std::ofstream;
-using std::ios;
 
 Game::Game(): shipSizes_(4) ,board_()
 {
-	srand(static_cast<unsigned int>(time(NULL)));
 	shipList_ = new int[4];
 	for (int i = 0; i < 4; i++)
 	{
@@ -27,7 +23,6 @@ Game::Game(): shipSizes_(4) ,board_()
 Game::Game(int boardsize, int shipList[], int shipSizes, int shipCount): shipSizes_(shipSizes), shipCount_(shipCount),
 		board_(boardsize, shipCount)
 {
-	srand(static_cast<unsigned int>(time(NULL)));
 	shipList_ = new int[shipSizes];
 	for (int i = 0; i < shipSizes_; i++)
 	{
@@ -111,7 +106,7 @@ void Game::addShipsRandom()
 {
 	//use system time to generate random number 
 	//cast to unsigned int to avoid build warnings
-	
+	srand(static_cast<unsigned int>(time(NULL)));
 	for (int i = 0; i < shipSizes_; i++)
 	{
 		for (int j = 0; j < shipList_[i]; j++)
@@ -147,6 +142,7 @@ void Game::addShipsRandom()
 			}
 		}
 	}
+	board_.printShips();
 	gameOver_ = 0;
 }
 
@@ -194,7 +190,7 @@ void Game::shoot()
 
 void Game::shootRandom()
 {
-	//srand(static_cast<unsigned int>(time(NULL)));
+	srand(static_cast<unsigned int>(time(NULL)));
 
 	int x;
 	int y;
@@ -203,6 +199,7 @@ void Game::shootRandom()
 
 	while (true)
 	{
+		int** values = board_.calculateValues();
 		x = rand() % (board_.getBoardSize() );
 		y = rand() % (board_.getBoardSize() );
 
@@ -223,44 +220,19 @@ void Game::shootRandom()
 	
 }
 
-int Game::shootRandomStatistics()
+void Game::shootAI()
 {
-	int shotsTaken = 0; // keep track of number of shots 
-	int x;
-	int y;
-	while (true)
-	{
-		x = rand() % (board_.getBoardSize());
-		y = rand() % (board_.getBoardSize());
-		if (board_.shoot(x, y) != 3) // successfull shot
-		{
-			shotsTaken++;
-		}
-		
-		if (board_.checkGameOver())
-		{
-			gameOver_ = 1;
-			return shotsTaken;
-		}
-	}
-
-}
-
-int Game::shootAI()
-{
-	int shotsTaken = 0; // keep track of number of shots 
 	board_.printShots();
 	while (true)
 	{
 		int x = 0;
 		int y = 0;
 
-		board_.calculateValues(x, y);
+		board_.getBestTarget(x, y);
 
 		if (board_.shoot(x, y) != 3) // successfull shot
 		{
 			board_.printShots();
-			shotsTaken++;
 			Sleep(500);
 		}
 
@@ -269,75 +241,9 @@ int Game::shootAI()
 			board_.printShots();
 			cout << "Peli loppui.\n\n";
 			gameOver_ = 1;
-			return shotsTaken;
+			break;
 		}
 	}
-}
-
-int Game::shootAIStatistics()
-{
-	int shotsTaken = 0; // keep track of number of shots 
-	
-	while (true)
-	{
-		int x = 0;
-		int y = 0;
-
-		board_.calculateValues(x, y);
-
-		if (board_.shoot(x, y) != 3) // successfull shot
-		{		
-			shotsTaken++;
-
-		}
-		if (board_.checkGameOver())
-		{		
-			gameOver_ = 1;
-			return shotsTaken;
-		}
-	}
-}
-
-void Game::simulateShooting(int simulationtimes, string logfile)
-{
-	ofstream statisticFile(logfile, ios::out);
-
-	const string menuText =
-
-		"Simulointi - Anna ampumisalgoritmi\n"
-		"=======================\n\n"
-		"Valinnat:\n"
-		"1) Satunnainen\n"
-		"2) algoritmi\n";
-
-	string userChoise;
-
-
-	cout << menuText;
-	getline(cin, userChoise);
-
-	
-
-	if (!statisticFile)
-	{
-		cout << "File could not be opened" << endl;
-		return;
-	}
-
-	for (int i = 0; i < simulationtimes; i++)
-	{
-		board_.initialize();
-		addShipsRandom();
-		if (userChoise == "1")
-		{
-			statisticFile << shootRandomStatistics() << endl;
-		}
-		if (userChoise == "2")
-		{
-			statisticFile << shootAIStatistics() << endl;
-		}
-	}
-	return;
 }
 
 void Game::menu()
@@ -396,27 +302,6 @@ void Game::menu()
 				//shootRandom();
 				shootAI();
 			}
-		}
-
-		else if (userChoise == "5") // hidden statistical testing
-		{
-
-			cout << "Anna simulointikerrat: ";
-			getline(cin, userChoise);
-			int simulateTimes = 0;
-
-
-			try
-			{
-				simulateTimes = stoi(userChoise);
-			}
-			catch (const std::exception&)
-			{
-				cout << "Anna kokonaisluku." << endl;
-			}
-
-			simulateShooting(simulateTimes, "statistics.txt");
-
 		}
 		else if (userChoise == "L" || userChoise == "l")
 		{

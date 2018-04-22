@@ -37,7 +37,7 @@ public:
 	void printShips() const;
 
 	//functions used by shooting AI to find best target
-	int calculateValues(int & x, int & y);
+	int** calculateValues();
 	void getBestTarget(int& x, int& y);
 	
 	bool checkGameOver()const;
