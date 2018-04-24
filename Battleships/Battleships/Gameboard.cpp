@@ -82,7 +82,7 @@ void Gameboard::initialize()
 	{
 		for (int j = 0; j < boardSize_; j++)
 		{
-			shots_[i][j] = 0;
+			shots_[i][j] = ' ';
 			ships_[i][j] = -1;
 			values_[i][j] = 0;
 		}
@@ -266,7 +266,7 @@ return
 */
 int Gameboard::shoot(int x, int y)
 {
-	if (shots_[x][y] != 0)
+	if (shots_[x][y] != ' ')
 	{
 		return 3; //have already shot there
 	}
@@ -599,7 +599,7 @@ int Gameboard::getNeighborValue(int x, int y)
 	{
 		return -100;
 	}
-	else if (shots_[x][y] == 0)
+	else if (shots_[x][y] == ' ')
 	{
 		return 1;
 	}

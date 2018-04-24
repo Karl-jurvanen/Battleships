@@ -126,7 +126,7 @@ void Game::addShipsRandom()
 
 				x = rand() % (board_.getBoardSize() );
 				y = rand() % (board_.getBoardSize() );
-				dir = rand() % 3;
+				dir = rand() % 4;
 
 				switch (dir)
 				{
@@ -147,6 +147,7 @@ void Game::addShipsRandom()
 			}
 		}
 	}
+	board_.printShips();
 	gameOver_ = 0;
 }
 
