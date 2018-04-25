@@ -28,11 +28,10 @@ Game::Game(int boardsize, int shipList[], int shipSizes, int shipCount): shipSiz
 		board_(boardsize, shipCount)
 {
 	srand(static_cast<unsigned int>(time(NULL)));
-	shipList_ = new int[shipSizes];
+	shipList_ = new int[shipSizes_];
 	for (int i = 0; i < shipSizes_; i++)
 	{
-	shipList_[i] = shipList[i];
-
+		shipList_[i] = shipList[i];
 	}
 	gameOver_ = 1;
 }
@@ -72,6 +71,18 @@ void Game::addShips()
 				case 6: cout << message.insert(5, "kuuden");
 					break;
 				case 7: cout << message.insert(5, "seitseman");
+					break;
+				case 8: cout << message.insert(5, "kahdeksan");
+					break;
+				case 9: cout << message.insert(5, "yhdeksan");
+					break;
+				case 10: cout << message.insert(5, "kymmenen");
+					break;
+				case 11: cout << message.insert(5, "yhdentoista");
+					break;
+				case 12: cout << message.insert(5, "kahdentoista");
+					break;
+				case 13: cout << message.insert(5, "kolmentoista");
 					break;
 				default:
 					break;
@@ -260,6 +271,8 @@ int Game::shootAI()
 
 		if (board_.shoot(x, y) != 3) // successfull shot
 		{
+			system("cls");
+
 			board_.printShots();
 			shotsTaken++;
 			Sleep(500);
