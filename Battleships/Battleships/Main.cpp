@@ -172,7 +172,7 @@ bool readSettings(string settingsFile, int& boardsize, int*& ships, int& longest
 	}
 
 	//file did not set shipcount or boardsize
-	if (longest == 0 || boardsize == 0)
+	if (longest == 0 || boardsize == 0 || longest > boardsize)
 	{
 		if (flag == 1) { delete[] ships; }
 		file.close();
