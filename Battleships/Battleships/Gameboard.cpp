@@ -93,6 +93,7 @@ void Gameboard::initialize()
 	{
 		shiplist_[i] = Ship();	
 	}
+	return;
 }
 
 /*
